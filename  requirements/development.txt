@@ -1,0 +1,4 @@
+-r base.txt
+
+pip~=22.0.4
+setuptools~=58.1.0

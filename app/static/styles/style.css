@@ -1,0 +1,212 @@
+/* variables */
+:root {
+    --mark-5-color: #59e744;
+    --mark-4-color: #ffd800;
+    --mark-3-color: #ed9121;
+    --mark-2-color: rgb(187, 59, 56);
+    --accent-color: #294262;
+    --bg-light-color: #ebf9fc;
+    --light-border-color: #fafafa;
+
+    --bg-dark-color: #0D1117;
+    --dark-accent-color: #21262D;
+    --dark-border-color: #2F353B;
+
+    --mark-dark: #0D1117;
+}
+
+/* header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.header-logo {
+    color: black;
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+/* main */
+.home-subject {
+    line-height: 1.2em;
+}
+
+.home-subject h4 {
+    font-size: 1.3em;
+}
+
+.mark-card-date {
+    font-size: 0.8em;
+}
+
+.one-day-header {
+    background-color: var(--light-border-color);
+}
+
+.mark-card {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    text-align: center;
+    width: 130px;
+}
+
+.mark-card * {
+    margin: 0;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis; /* Многоточие */
+}
+
+.mark-block {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* footer */
+.footer {
+    padding: 2.5rem 0;
+    color: #727272;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+
+.footer p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* other */
+.one-line-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+}
+
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.table-text {
+    color: var(--accent-color);
+}
+
+.word-break {
+    word-break: break-all;
+}
+
+.pointer {
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+}
+
+/* marks */
+
+.text-bg-2 {
+    background-color: var(--mark-2-color);
+}
+
+.text-bg-3 {
+    background-color: var(--mark-3-color);
+}
+
+.text-bg-4 {
+    background-color: var(--mark-4-color);
+}
+
+.text-bg-5 {
+    background-color: var(--mark-5-color);
+}
+
+.text-2 {
+    color: var(--mark-2-color);
+}
+
+.text-3 {
+    color: var(--mark-3-color);
+}
+
+.text-4 {
+    color: var(--mark-4-color);
+}
+
+.text-5 {
+    color: var(--mark-5-color);
+}
+
+.bg-2 {
+    background-color: var(--mark-2-color);
+    color: white;
+}
+
+.bg-3 {
+    background-color: var(--mark-3-color);
+    color: white;
+}
+
+.bg-4 {
+    background-color: var(--mark-4-color);
+    color: white;
+}
+
+.bg-5 {
+    background-color: var(--mark-5-color);
+    color: white;
+}
+
+.loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/static/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+}

@@ -1,0 +1,66 @@
+<div class="overflow-hidden">
+    <div class="row g-2">
+        <div class="col-md-6">
+            <div class="one-day-container"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="row g-2">
+                <div>
+                    <div class="border rounded-3 shadow p-0 block">
+                        <div class="m-2">
+                            <h4 class="mb-0">Последние оценки</h4>
+                            <hr class="mb-2 mt-2">
+                            <div class="d-flex flex-wrap justify-content-around">
+                                {% for item in latest_marks %}
+                                    <div class="rounded-4 bg-{{ item["mark"] }} mark-card show-subject-modal pointer"
+                                         data-date="{{ item["date"] }}"
+                                         data-lesson="{{ item["lesson"] }}">
+                                        <p title="{{ item["subject"] }}">{{ item["subject"] }}</p>
+                                        <h3>{{ item["mark"] }}</h3>
+                                        <p class="mark-card-date">{{ item["date"] }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-2">
+                <div>
+                    <div class="border rounded-3 shadow p-0 block">
+                        <div id="vk_groups"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Group("vk_groups", {
+                                mode: 4,
+                                no_cover: 1,
+                                wide: 1,
+                                color1: "FFFFFF",
+                                color2: "000000",
+                                color3: "5181B8",
+                                width: "auto",
+                                height: 500
+                            }, 166562603);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#<div class="row">#}
+{##}
+{##}
+{#</div>#}
+{#<div class="row g-2">#}
+{#    <div class="col-md-4">#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="col-md-8">#}
+{#        <div class="border rounded-3">#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

@@ -1,0 +1,55 @@
+<div class="date" data-date="{{ week.days[0].str_date }}"></div>
+
+<div class="container-fluid d-flex justify-content-between p-1">
+    <div class="ms-1 text-dark-emphasis pointer prev-week">
+        🡸
+    </div>
+    <div>
+        {{ week.days[0].str_date }}-{{ week.days[6].str_date }}
+    </div>
+    <div class="me-1 text-dark-emphasis pointer next-week">
+        🡺
+    </div>
+</div>
+
+{% for day in week.days[:-1] %}
+
+    {% if loop.index0 % 2 == 0 %}
+        <div class="row g-2 mb-2">
+    {% endif %}
+
+<div class="col-xl-6">
+    <div class="border rounded-3 block h-100">
+        <h5 class="p-2 mb-1">{{ day.formatted_date }}</h5>
+        <table class="table table-hover table-sm table-text m-0">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Предмет</th>
+                <th scope="col">Домашнее задание</th>
+                <th scope="col">Оценки</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i, subject in day.subjects.items()|sort() %}
+                <tr class="show-subject-modal" data-date="{{ day.str_date }}" data-lesson="{{ i }}">
+                    <td>{{ i }}</td>
+                    <td><b>{{ subject.name }}</b></td>
+                    <td class="word-break">
+                        {{ subject.homework }}
+                    </td>
+                    <td>
+                        {% for mark in subject.marks %}
+                            <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% if loop.index0 % 2 == 1 %}
+    </div>
+{% endif %}
+{% endfor %}

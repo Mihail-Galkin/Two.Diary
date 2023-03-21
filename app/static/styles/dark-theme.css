@@ -1,0 +1,68 @@
+/*[data-theme="dark"] {*/
+/*    --mark-5-color: #0D1117;*/
+/*    --mark-4-color: #0D1117;*/
+/*    --mark-3-color: #0D1117;*/
+/*    --mark-2-color: #0D1117;*/
+/*}*/
+
+
+[data-theme="dark"] {
+    background-color: var(--bg-dark-color);
+    color: white;
+}
+
+[data-theme="dark"] .modal-content{
+    background-color: var(--bg-dark-color);
+    color: white;
+}
+
+
+[data-theme="dark"] .header-logo {
+    color: white;
+}
+
+[data-theme="dark"] .header {
+    border-color: var(--dark-border-color) !important;
+}
+
+
+[data-theme="dark"] .block {
+    background-color: var(--dark-accent-color);
+    border-color: var(--dark-border-color) !important;
+}
+
+[data-theme="dark"] .footer {
+    background-color: var(--dark-accent-color);
+    border-color: var(--dark-border-color) !important;
+}
+
+[data-theme="dark"] .one-day-header {
+    background-color: var(--dark-border-color);
+}
+
+[data-theme="dark"] hr {
+    background-color: var(--dark-border-color);
+    color: var(--dark-border-color);
+    border-color: var(--dark-border-color);
+}
+
+[data-theme="dark"] table {
+    border-color: var(--dark-border-color) !important;
+    color: white;
+}
+
+[data-theme="dark"] .table-text {
+    color: whitesmoke;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    color: rgb(185, 185, 185);
+}
+
+[data-theme="dark"] select {
+    background-color: var(--dark-accent-color);
+    border-color: var(--dark-border-color);
+    color: whitesmoke;
+}
+
+

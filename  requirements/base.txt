@@ -1,0 +1,14 @@
+babel
+MarkupSafe
+Flask
+fake-useragent
+requests
+xlrd
+pandas
+beautifulsoup4
+Flask-SQLAlchemy
+SQLAlchemy
+Flask-WTF
+WTForms
+email_validator
+lxml

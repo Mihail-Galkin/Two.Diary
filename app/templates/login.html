@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Авторизация</title>
+</head>
+<body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<div class="card container mt-2">
+    <article class="card-body">
+        <h4 class="card-title text-center mb-4 mt-1">Вход</h4>
+        <form method="post" novalidate>
+            <div> {{ form.csrf_token }}</div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    {{ form.email(class="form-control", placeholder="Email", type="email") }}
+                </div>
+                <div class="m-2">
+                    {% for error in form.email.errors %}
+                        <div class="alert alert-danger" role="alert"> {{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {{ form.password(class="form-control", placeholder="Пароль", type="password") }}
+                </div>
+                <div class="m-2">
+                    {% for error in form.password.errors %}
+                        <div class="alert alert-danger" role="alert"> {{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group"> {{ form.submit(type="submit", class="btn btn-primary btn-block") }}</div>
+        </form>
+    </article>
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,105 @@
+<div class="block border rounded-3 mb-2">
+    <label>
+        Период:
+        <select class="form-select mb-3 marks-period-select">
+            {% for period in periods %}
+                <option data-begin="{{ period["dateBegin"] }}"
+                        data-end="{{ period["dateEnd"] }}"
+                        {% if selected == period["name"] %}selected{% endif %}>{{ period["name"] }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+
+    <table class="table table-hover table-sm table-text m-0 d-none d-md-table">
+        <thead>
+        <tr>
+            <th scope="col">Предмет</th>
+            <th scope="col">Оценки</th>
+            <th scope="col">Средний балл</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subject in marks %}
+            <tr class="marks" data-sum="{{ marks[subject]["sum"] }}"
+                data-count="{{ marks[subject]["count"] }}"
+                data-subject="{{ subject }}">
+                <td class="marks-subject-title">{{ subject }}</td>
+                <td class="marks-container">
+                    {% for mark in marks[subject]["marks"] %}
+                        {% if live_mode %}
+                            <span class="badge text-bg-{{ mark["value"] }} show-subject-modal"
+                                  data-date="{{ mark["date"] }}"
+                                  data-lesson="{{ mark["subject_index"] }}">{{ mark["value"] }}</span>
+
+                        {% else %}
+                            <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
+                        {% endif %}
+
+                    {% endfor %}
+                </td>
+                <td>
+                    <span class=" badge
+                              text-bg-{{ marks[subject]["average"]|round|int }}">{{ marks[subject]["average"] }}</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="d-md-none">
+    {% for subject in marks %}
+        <div class="marks block border rounded-3 p-2 mb-2" data-sum="{{ marks[subject]["sum"] }}"
+             data-count="{{ marks[subject]["count"] }}"
+             data-subject="{{ subject }}">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>{{ subject }}</h5>
+                <span class="badge text-bg-{{ marks[subject]["average"]|round|int }}">{{ marks[subject]["average"] }}</span>
+            </div>
+
+            <div class="d-flex justify-content-start flex-wrap">
+                {% for mark in marks[subject]["marks"] %}
+                    {% if live_mode %}
+                        <div class="mark-block bg-{{ mark["value"] }} rounded-2 m-1 show-subject-modal"
+                             data-date="{{ mark["date"] }}" data-lesson="{{ mark["subject_index"] }}">
+                            {{ mark["value"] }}
+                        </div>
+                    {% else %}
+                        <div class="mark-block bg-{{ mark }} rounded-2 m-1">{{ mark }}</div>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="modal fade" id="marks-modal" tabindex="-1" aria-labelledby="marksModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fw-bolder" id="marksModalLabel"></h4>
+                <button type="button" class="btn-close mark-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mark-raise-block">
+                    <h5 class="fw-bolder text-muted">До повышения оценки:</h5>
+                    <p class="mark-raise"></p>
+                    <hr class="my-1">
+                </div>
+
+                <h5 class="fw-bolder text-muted">Рассчет балла:</h5>
+                <form action="">
+                    <label>"5": <input type="number" value="0" max="20" min="0" class="count-5"></label>
+                    <label>"4": <input type="number" value="0" max="20" min="0" class="count-4"></label>
+                    <label>"3": <input type="number" value="0" max="20" min="0" class="count-3"></label>
+                    <label>"2": <input type="number" value="0" max="20" min="0" class="count-2"></label>
+                    <br>
+                    <input type="submit" value="Рассчитать">
+                    <p class="avg-mark badge">Средний балл: 0</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

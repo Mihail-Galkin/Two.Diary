@@ -1,0 +1,43 @@
+<!--  Subjects format: [(day, subject_index), ...]   -->
+
+<div class="border rounded-3 block p-2 ots-subjects"
+     data-last-day="{{ subjects[0][0].str_date }}" data-last-subject="{{ subjects[0][1] }}"
+     data-first-day="{{ subjects[-1][0].str_date }}" data-first-subject="{{ subjects[-1][1] }}"
+     data-page="{{ page }}" data-subject="{{ subjects[0][0].subjects[subjects[0][1]].name }}">
+
+    {% for day, i in subjects %}
+        <div class="show-subject-modal" data-date="{{ day.str_date }}" data-lesson="{{ i }}">
+            <div class="d-flex mb-1 justify-content-between">
+                <p class="text-secondary m-0">{{ day.formatted_date }}</p>
+                <p class="text-secondary m-0">{{ day.subjects[i].time_begin }}-{{ day.subjects[i].time_end }}</p>
+            </div>
+
+            <h4 class="mb-1">{{ day.subjects[i].name }}</h4>
+            <p class="text-secondary mb-1 one-line-text">{{ day.subjects[i].theme }}</p>
+            <p class="mb-1 one-line-text">{{ day.subjects[i].homework }}</p>
+            {% for mark in day.subjects[i].marks %}
+                <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
+            {% endfor %}
+        </div>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="d-flex justify-content-between align-items-center my-2">
+    {% if page != 1 %}
+        <p class="pointer ots-prev-page text-dark-emphasis">
+            🡸
+        </p>
+    {% else %}
+        <div></div>
+    {% endif %}
+    Страница {{ page }}
+    {% if not is_last_page %}
+        <p class="pointer ots-next-page text-dark-emphasis">
+            🡺
+        </p>
+    {% else %}
+        <div></div>
+    {% endif %}
+</div>
