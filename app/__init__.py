@@ -57,4 +57,6 @@ def create_app():
         flask.session.permanent = True
         app.permanent_session_lifetime = td(days=365)
 
-    return app
+    with app.app_context():
+        db.create_all()
+        return app
