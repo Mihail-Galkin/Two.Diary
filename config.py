@@ -4,7 +4,7 @@ import os
 class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'YOUR_RANDOM_SECRET_KEY'
+    SECRET_KEY = os.environ['SECRET_KEY']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']  # "sqlite:///users.db?check_same_thread=False"
 
