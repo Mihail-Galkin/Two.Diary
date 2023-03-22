@@ -1,9 +1,12 @@
+import os
+
+
 class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
     SECRET_KEY = 'YOUR_RANDOM_SECRET_KEY'
-    SQLALCHEMY_DATABASE_URI = "sqlite:///users.db?check_same_thread=False"  # os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']  # "sqlite:///users.db?check_same_thread=False"
 
 
 class ProductionConfig(Config):
@@ -13,4 +16,3 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-
