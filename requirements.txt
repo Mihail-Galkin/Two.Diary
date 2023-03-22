@@ -13,3 +13,4 @@ WTForms
 email_validator
 lxml
 gunicorn
+psycopg2
