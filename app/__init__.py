@@ -22,6 +22,13 @@ def create_app():
         logging.critical("Укажите режим запуска в FLASK_ENV (development, production)")
         sys.exit()
 
+    if os.getenv("PEM") is None:
+        logging.critical("Укажите PEM файл сертификата")
+        sys.exit()
+    else:
+        with open("cert.pem", "w", encoding="utf8") as f:
+            f.write(os.getenv("PEM").replace(r"\n", "\n"))
+
     app.config.from_object(config)
 
     # Initialize Flask extensions here

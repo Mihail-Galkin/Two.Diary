@@ -1,11 +1,11 @@
 import copy
+import os
 import typing
 from dataclasses import dataclass, field
 from datetime import date as d
 from datetime import datetime as dt
 from datetime import timedelta as td
 
-import certifi
 import requests
 from markupsafe import Markup
 
@@ -64,7 +64,7 @@ class Diary:
         cookies = {'X1_SSO': session_token}
 
         self.session = requests.Session()
-        self.session.verify = certifi.where()
+        self.session.verify = "cert.pem"
         self.session.headers.update(get_header())
         self.session.get("https://one.43edu.ru/", cookies=cookies)
 
