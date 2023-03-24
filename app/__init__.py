@@ -3,6 +3,7 @@ import os
 import sys
 from datetime import timedelta as td
 
+import certifi
 import flask
 from flask import Flask
 
@@ -28,11 +29,16 @@ def create_app():
         logging.critical("Укажите PEM файл сертификата")
         sys.exit()
     else:
-        with open("cert.pem", "w", encoding="utf8") as f:
-            f.write(os.getenv("PEM").replace(r"\n", "\n"))
+        with open("cert.pem", "w", encoding="utf8") as new:
+            with open(certifi.where(), "r", encoding="utf8") as old:
+                new.write(old.read())
+            new.write("\n")
+            new.write(os.getenv("PEM").replace(r"\n", "\n"))
+        with open("cert.pem", "r", encoding="utf8") as f:
+            print(f.read())
         os.environ["REQUESTS_CA_BUNDLE"] = 'cert.pem'
         os.environ["SSL_CERT_FILE"] = 'cert.pem'
-        print(os.getenv("PEM").replace(r"\n", "\n"))
+
 
 
     # Initialize Flask extensions here
