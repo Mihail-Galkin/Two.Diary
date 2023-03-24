@@ -24,6 +24,17 @@ def create_app():
 
     app.config.from_object(config)
 
+    if os.getenv("PEM") is None:
+        logging.critical("Укажите PEM файл сертификата")
+        sys.exit()
+    else:
+        with open("cert.pem", "w", encoding="utf8") as f:
+            f.write(os.getenv("PEM").replace(r"\n", "\n"))
+        os.environ["REQUESTS_CA_BUNDLE"] = 'cert.pem'
+        os.environ["SSL_CERT_FILE"] = 'cert.pem'
+        print(os.getenv("PEM").replace(r"\n", "\n"))
+
+
     # Initialize Flask extensions here
     db.init_app(app)
 
