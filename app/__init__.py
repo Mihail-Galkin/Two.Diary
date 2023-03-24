@@ -28,6 +28,8 @@ def create_app():
     else:
         with open("cert.pem", "w", encoding="utf8") as f:
             f.write(os.getenv("PEM").replace(r"\n", "\n"))
+        os.environ["REQUESTS_CA_BUNDLE"] = 'cert.pem'
+        os.environ["SSL_CERT_FILE"] = 'cert.pem'
 
     app.config.from_object(config)
 
