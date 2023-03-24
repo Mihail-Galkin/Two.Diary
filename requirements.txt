@@ -15,4 +15,3 @@ lxml
 gunicorn
 psycopg2
 certifi
-pip-system-certs
