@@ -64,7 +64,6 @@ class Diary:
         cookies = {'X1_SSO': session_token}
 
         self.session = requests.Session()
-        self.session.verify = "cert.pem"
         self.session.headers.update(get_header())
         self.session.get("https://one.43edu.ru/", cookies=cookies)
 
