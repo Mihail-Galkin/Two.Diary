@@ -34,10 +34,6 @@ def create_app():
                 new_str = old.read()
             new_str += "\n" + os.getenv("PEM").replace(r"\n", "\n")
             new.write(new_str)
-        os.environ["REQUESTS_CA_BUNDLE"] = 'cert.pem'
-        os.environ["SSL_CERT_FILE"] = 'cert.pem'
-
-
 
     # Initialize Flask extensions here
     db.init_app(app)
