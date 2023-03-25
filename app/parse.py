@@ -18,6 +18,7 @@ from app.utils import date_to_str, str_to_date
 
 def auth(login: str, password: str) -> requests.Session:
     session = requests.Session()
+    session.trust_env = False
     session.headers.update(get_header())
 
     url = 'https://passport.43edu.ru/auth/login'
