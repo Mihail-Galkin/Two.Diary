@@ -50,8 +50,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], ret
     if json["success"]:
         return json, session
     user = db.session.query(User).filter(User.guid == guid).first()
-    if json["message"] == "Ученик не найден" and retry:
-        print("abc")
+    if retry:
         sess = auth(user.email, user.get_password())
         cookie = get_session_cookie(sess)
         user.source_session = cookie
