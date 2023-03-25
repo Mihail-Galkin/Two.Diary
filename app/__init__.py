@@ -33,7 +33,6 @@ def create_app():
             with open(certifi.where(), "r", encoding="utf8") as old:
                 new_str = old.read()
             new_str += "\n" + os.getenv("PEM").replace(r"\n", "\n")
-            print(new_str)
             new.write(new_str)
         os.environ["REQUESTS_CA_BUNDLE"] = 'cert.pem'
         os.environ["SSL_CERT_FILE"] = 'cert.pem'
