@@ -25,15 +25,12 @@ def create_app():
 
     app.config.from_object(config)
 
-    # if os.getenv("PEM") is None:
-    #     logging.critical("Укажите PEM файл сертификата")
-    #     sys.exit()
-    # else:
-    #     with open("cert.pem", "w", encoding="utf8") as new:
-    #         with open(certifi.where(), "r", encoding="utf8") as old:
-    #             new_str = old.read()
-    #         new_str += "\n" + os.getenv("PEM").replace(r"\n", "\n")
-    #         new.write(new_str)
+    if os.getenv("PEM") is None:
+        logging.critical("Укажите PEM файл сертификата")
+        sys.exit()
+    else:
+        with open("cert.pem", "w", encoding="utf8") as new:
+            new.write(os.getenv("PEM").replace(r"\n", "\n"))
 
     # Initialize Flask extensions here
     db.init_app(app)
