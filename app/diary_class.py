@@ -65,7 +65,7 @@ class Diary:
 
         self.session = requests.Session()
         self.session.headers.update(get_header())
-        self.session.get("https://one.43edu.ru/", cookies=cookies) # , verify="cert.pem"
+        self.session.get("https://one.43edu.ru/", cookies=cookies, verify="43edu-ru-chain.pem")
 
         self.weeks: typing.Dict[d, Week] = {}
 
