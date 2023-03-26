@@ -24,7 +24,7 @@ def auth(login: str, password: str) -> requests.Session:
     session.headers.update(get_header())
 
     url = 'https://passport.43edu.ru/auth/login'
-    r = session.get(url)
+    r = session.get(url, verify=False)
     print(r.text)
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
     r = session.post(url, json=json.dumps(data), verify=False,

@@ -10,7 +10,7 @@ from app.schedule import bp
 def schedule():
     # TODO: тени везде
     url = "https://kpml.ru/pages/raspisanie/izmeneniya-v-raspisanii"
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
 
     strainer = SoupStrainer("div", {"class": "page-content"})
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
