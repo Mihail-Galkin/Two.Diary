@@ -1,4 +1,5 @@
 import csv
+import json
 import logging
 import os
 from datetime import date as d
@@ -24,13 +25,13 @@ def auth(login: str, password: str) -> requests.Session:
 
     url = 'https://passport.43edu.ru/auth/login'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
-    r = session.post(url, json=data, verify="/etc/secrets/cert.pem")
+    r = session.post(url, data=json.dumps(data), verify=False)
     print(r.text)
     return session
 
 
 def get_guid(session: requests.Session) -> str:
-    response = session.get("https://one.43edu.ru/edv/index/participant", verify="/etc/secrets/cert.pem")
+    response = session.get("https://one.43edu.ru/edv/index/participant", verify=False)
 
     strainer = SoupStrainer("div", {"id": "participant"})
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
@@ -46,7 +47,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], ret
 
     url = "https://one.43edu.ru/edv/index/diary/" + guid
     data = {'date': date}
-    response = session.get(url, params=data, verify="/etc/secrets/cert.pem")
+    response = session.get(url, params=data, verify=False)
     json = response.json()
     if json["success"]:
         return json, session
@@ -74,7 +75,7 @@ def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: 
     else:
         url = "https://one.43edu.ru/edv/index/report/marks/" + guid
         data = {"begin": begin, "end": end}
-    response = session.get(url, params=data, verify="/etc/secrets/cert.pem")
+    response = session.get(url, params=data, verify=False)
 
     workbook = xlrd.open_workbook(file_contents=response.content, ignore_workbook_corruption=True)
     df = pd.read_excel(workbook)
