@@ -22,10 +22,11 @@ def auth(login: str, password: str) -> requests.Session:
     session.trust_env = False
     session.headers.update(get_header())
 
-    url = 'https://passport.43edu.ru/auth/login'
+    url = 'https://httpbin.org/anything'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
     r = session.post(url, data=data, verify=False)
-    print(r.text, login, password)
+    print(r.json())
+
 
     return session
 
