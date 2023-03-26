@@ -22,6 +22,7 @@ def auth(login: str, password: str) -> requests.Session:
     session = requests.Session()
     session.trust_env = False
     session.headers.update(get_header())
+    session.headers.update({'Content-Type': 'application/x-www-form-urlencoded'})
 
     url = 'https://passport.43edu.ru/auth/login'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
