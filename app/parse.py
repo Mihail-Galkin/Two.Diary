@@ -22,11 +22,13 @@ def auth(login: str, password: str) -> requests.Session:
     session = requests.Session()
     session.trust_env = False
     session.headers.update(get_header())
-    session.headers.update({'Content-Type': 'application/x-www-form-urlencoded'})
 
     url = 'https://passport.43edu.ru/auth/login'
+    r = session.get(url)
+    print(r.text)
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
-    r = session.post(url, json=json.dumps(data), verify=False)
+    r = session.post(url, json=json.dumps(data), verify=False,
+                     headers={'Content-Type': 'application/x-www-form-urlencoded'})
     print(r.text)
     return session
 
@@ -42,7 +44,8 @@ def get_guid(session: requests.Session) -> str:
     return guid
 
 
-def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], retry=True) -> Optional[Tuple[dict, requests.Session]]:
+def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], retry=True) -> Optional[
+    Tuple[dict, requests.Session]]:
     if isinstance(date, d):
         date = date_to_str(date)
 
