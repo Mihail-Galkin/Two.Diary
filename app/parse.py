@@ -24,7 +24,8 @@ def auth(login: str, password: str) -> requests.Session:
 
     url = 'https://passport.43edu.ru/auth/login'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
-    session.post(url, data=data, proxies={os.getenv("proxy1"): os.getenv("proxy2")}, verify=False)
+    r = session.post(url, data=data, proxies={os.getenv("proxy1"): os.getenv("proxy2")}, verify=False)
+    print(r.text)
 
     return session
 
