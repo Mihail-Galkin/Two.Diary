@@ -25,7 +25,7 @@ def auth(login: str, password: str) -> requests.Session:
 
     url = 'https://passport.43edu.ru/auth/login'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
-    r = session.post(url, data=json.dumps(data), verify=False)
+    r = session.post(url, json=json.dumps(data), verify=False)
     print(r.text)
     return session
 
