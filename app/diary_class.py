@@ -66,7 +66,7 @@ class Diary:
         self.session = requests.Session()
         self.session.trust_env = False
         self.session.headers.update(get_header())
-        self.session.get("https://one.43edu.ru/", cookies=cookies, proxies={os.getenv("proxy1"): os.getenv("proxy2")}, verify="43edu-ru-chain.pem")
+        self.session.get("https://one.43edu.ru/", cookies=cookies, proxies={os.getenv("proxy1"): os.getenv("proxy2")}, verify=False)
 
         self.weeks: typing.Dict[d, Week] = {}
 
