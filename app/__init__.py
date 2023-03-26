@@ -14,7 +14,7 @@ from config import DevelopmentConfig, ProductionConfig
 def create_app():
     from app.decorators import diaries
     app = Flask(__name__)
-
+    print({os.getenv("proxy1"): os.getenv("proxy2")})
     if os.getenv("FLASK_ENV") == "development":
         config = DevelopmentConfig
     elif os.getenv("FLASK_ENV") == "production":
