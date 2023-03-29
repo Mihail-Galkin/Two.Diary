@@ -15,3 +15,4 @@ lxml
 gunicorn
 psycopg2
 certifi
+python-dotenv
