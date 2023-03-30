@@ -8,9 +8,8 @@ from app.schedule import bp
 @bp.route('/schedule')
 @only_ajax()
 def schedule():
-    # TODO: тени везде
     url = "https://kpml.ru/pages/raspisanie/izmeneniya-v-raspisanii"
-    response = requests.get(url, verify=False)
+    response = requests.get(url)
 
     strainer = SoupStrainer("div", {"class": "page-content"})
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)

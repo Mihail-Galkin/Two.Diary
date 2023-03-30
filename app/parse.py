@@ -20,21 +20,16 @@ from app.utils import date_to_str, str_to_date
 
 def auth(login: str, password: str) -> requests.Session:
     session = requests.Session()
-    session.trust_env = False
     session.headers.update(get_header())
 
     url = 'https://passport.43edu.ru/auth/login'
-    r = session.get(url, verify=False)
-    print(r.text)
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
-    r = session.post(url, json=json.dumps(data), verify=False,
-                     headers={'Content-Type': 'application/x-www-form-urlencoded'})
-    print(r.text)
+    session.post(url, data=data)
     return session
 
 
 def get_guid(session: requests.Session) -> str:
-    response = session.get("https://one.43edu.ru/edv/index/participant", verify=False)
+    response = session.get("https://one.43edu.ru/edv/index/participant")
 
     strainer = SoupStrainer("div", {"id": "participant"})
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
@@ -51,7 +46,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], ret
 
     url = "https://one.43edu.ru/edv/index/diary/" + guid
     data = {'date': date}
-    response = session.get(url, params=data, verify=False)
+    response = session.get(url, params=data)
     json = response.json()
     if json["success"]:
         return json, session
@@ -79,7 +74,7 @@ def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: 
     else:
         url = "https://one.43edu.ru/edv/index/report/marks/" + guid
         data = {"begin": begin, "end": end}
-    response = session.get(url, params=data, verify=False)
+    response = session.get(url, params=data)
 
     workbook = xlrd.open_workbook(file_contents=response.content, ignore_workbook_corruption=True)
     df = pd.read_excel(workbook)
