@@ -70,10 +70,10 @@ def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: 
     """
     if final_grades:
         url = "https://one.43edu.ru/edv/index/report/period/" + guid
-        data = {}
+        data = {"format": "xls"}
     else:
         url = "https://one.43edu.ru/edv/index/report/marks/" + guid
-        data = {"begin": begin, "end": end}
+        data = {"begin": begin, "end": end, "format": "xls"}
     response = session.get(url, params=data)
 
     workbook = xlrd.open_workbook(file_contents=response.content, ignore_workbook_corruption=True)
