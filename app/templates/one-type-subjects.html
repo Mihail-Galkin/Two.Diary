@@ -27,7 +27,7 @@
 <div class="d-flex justify-content-between align-items-center my-2">
     {% if page != 1 %}
         <p class="pointer ots-prev-page text-dark-emphasis">
-            🡸
+            <img src='/static/images/arrow-left.svg' alt="some file" style="width: 1em; height: 1em">
         </p>
     {% else %}
         <div></div>
@@ -35,7 +35,7 @@
     Страница {{ page }}
     {% if not is_last_page %}
         <p class="pointer ots-next-page text-dark-emphasis">
-            🡺
+            <img src='/static/images/arrow-right.svg' alt="some file" style="width: 1em; height: 1em">
         </p>
     {% else %}
         <div></div>
