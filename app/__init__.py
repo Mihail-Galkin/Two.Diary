@@ -13,7 +13,7 @@ from config import DevelopmentConfig, ProductionConfig
 
 def create_app():
     from app.decorators import diaries
-    app = Flask(__name__, static_folder="static", static_url_path="static")
+    app = Flask(__name__, static_folder="static", static_url_path="/static")
     
     if os.getenv("FLASK_ENV") == "development":
         config = DevelopmentConfig
