@@ -1,0 +1,39 @@
+<div class="border rounded-3 block one-day shadow" data-date="{{ day.str_date }}">
+    <div class="container-fluid rounded-top-3 d-flex justify-content-between p-1 one-day-header">
+        <div class="ms-1 text-dark-emphasis pointer prev-day">
+            🡸
+        </div>
+        <div>
+            {{ day.formatted_date }}
+        </div>
+        <div class="me-1 text-dark-emphasis pointer next-day">
+            🡺
+        </div>
+    </div>
+    <div class="p-2">
+        {% if day.subjects.items()|length == 0 %}
+            <i>Уроков нет</i>
+        {% else %}
+            {% for i, subject in day.subjects.items()|sort() %}
+                <div class="show-subject-modal" data-date="{{ day.str_date }}" data-lesson="{{ i }}">
+                    <div class="d-flex mb-1 justify-content-between">
+                        <p class="text-secondary m-0">{{ i }} урок</p>
+                        <p class="text-secondary m-0">{{ subject.time_begin }}-{{ subject.time_end }}</p>
+                    </div>
+
+                    <h5 class="mb-1">{{ subject.name }}</h5>
+                    <p class="text-secondary mb-1 one-line-text">{{ subject.theme }}</p>
+                    <p class="mb-1 one-line-text">{{ subject.homework }}</p>
+                    {% for mark in subject.marks %}
+                        <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
+                    {% endfor %}
+                </div>
+
+                {% if not loop.last %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</div>

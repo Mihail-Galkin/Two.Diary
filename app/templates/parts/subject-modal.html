@@ -1,0 +1,32 @@
+<div aria-hidden="true" aria-labelledby="subjectModalLabel" class="modal fade" id="subject-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fw-bolder" id="subjectModalLabel">{{ subject.name }}</h4>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="fw-bolder">Тема:</h5>
+                <p class="word-break">{{ subject.theme }}</p>
+                <hr class="my-1">
+                <h5 class="fw-bolder">Домашнее задание:</h5>
+                <p class="word-break">{{ subject.homework }}</p>
+                {% if subject.previous_homework["date"] %}
+                    <hr class="my-1">
+                    <h5 class="fw-bolder">Домашнее задание с прошлого урока
+                        ({{ subject.previous_homework["date"] }}):</h5>
+                    <p class="word-break">{{ subject.previous_homework["homework"] }}</p>
+                {% endif %}
+                {% if subject.marks %}
+                    <hr class="my-1">
+                    <h5 class="fw-bolder">Оценки:</h5>
+                    {% for mark in subject.marks %}
+                        <p class="badge text-bg-{{ mark }}">{{ mark }}</p>
+                    {% endfor %}
+                {% endif %}
+                <hr>
+                <button type="button" class="btn btn-secondary open-ots" data-subject="{{ subject.name }}">Показать уроки</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@ from config import DevelopmentConfig, ProductionConfig
 
 def create_app():
     from app.decorators import diaries
-    app = Flask(__name__, static_folder="app/static", static_url_path="/static")
+    app = Flask(__name__, static_folder="static", static_url_path="/static")
     
     if os.getenv("FLASK_ENV") == "development":
         config = DevelopmentConfig
@@ -30,28 +30,28 @@ def create_app():
 
     # Register blueprints here
     from app.main import bp as main_bp
-    app.register_blueprint(main_bp, static_folder='app/static', static_url_path='/index/static')
+    app.register_blueprint(main_bp, static_folder='static', static_url_path='/index/static')
 
     from app.diary import bp as diary_bp
-    app.register_blueprint(diary_bp, static_folder='app/static', static_url_path='/diary/static')
+    app.register_blueprint(diary_bp, static_folder='static', static_url_path='/diary/static')
 
     from app.home import bp as home_bp
-    app.register_blueprint(home_bp, static_folder='app/static', static_url_path='/home/static')
+    app.register_blueprint(home_bp, static_folder='static', static_url_path='/home/static')
 
     from app.login import bp as login_bp
-    app.register_blueprint(login_bp, static_folder='app/static', static_url_path='/login/static')
+    app.register_blueprint(login_bp, static_folder='static', static_url_path='/login/static')
 
     from app.marks import bp as marks_bp
-    app.register_blueprint(marks_bp, static_folder='app/static', static_url_path='/marks/static')
+    app.register_blueprint(marks_bp, static_folder='static', static_url_path='/marks/static')
 
     from app.one_type_subjects import bp as ots_bp
-    app.register_blueprint(ots_bp, static_folder='app/static', static_url_path='/ots/static')
+    app.register_blueprint(ots_bp, static_folder='static', static_url_path='/ots/static')
 
     from app.schedule import bp as schedule_bp
-    app.register_blueprint(schedule_bp, static_folder='app/static', static_url_path='/schedule/static')
+    app.register_blueprint(schedule_bp, static_folder='static', static_url_path='/schedule/static')
 
     from app.subject_modal import bp as modal_bp
-    app.register_blueprint(modal_bp, static_folder='app/static', static_url_path='/modal/static')
+    app.register_blueprint(modal_bp, static_folder='static', static_url_path='/modal/static')
 
     @app.before_request
     def before_request():
