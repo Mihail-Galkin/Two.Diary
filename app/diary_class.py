@@ -64,7 +64,6 @@ class Diary:
         cookies = {'X1_SSO': session_token}
 
         self.session = requests.Session()
-        self.session.trust_env = False
         self.session.headers.update(get_header())
         self.session.get("https://one.43edu.ru/", cookies=cookies)
 
@@ -73,15 +72,11 @@ class Diary:
         raw, self.session = get_raw_diary(self.session, self.guid, get_monday(d.today()))
         self.periods = get_periods(raw)
         self.quarters = get_periods(raw, is_quarters=True)
-        print(self.quarters)
 
-        self.current = None
-        for i in self.quarters:
-            if str_to_date(i["dateBegin"]) <= d.today() <= str_to_date(i["dateEnd"]):
+        self.current = self.quarters[0]
+        for i in sorted(self.quarters, key=lambda x: str_to_date(x["dateBegin"])):
+            if d.today() >= str_to_date(i["dateBegin"]):
                 self.current = copy.deepcopy(i)
-                break
-        if self.current is None:
-            self.current = self.quarters[0]
 
     def get_day(self, date) -> Day:
         monday = get_monday(date)
