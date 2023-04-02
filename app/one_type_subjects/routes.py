@@ -20,6 +20,13 @@ def one_type_subjects(diary):
     page = int(request.args.get("page", 0))
 
     period = diary.current
+    day = str_to_date(request.args.get("period-day"))
+    quarters = diary.quarters
+    for i in quarters:
+        if str_to_date(i["dateBegin"]) <= day <= str_to_date(i["dateEnd"]):
+            period = i
+            break
+
     period_begin = str_to_date(period["dateBegin"])
     period_end = str_to_date(period["dateEnd"])
 
@@ -59,4 +66,5 @@ def one_type_subjects(diary):
                            subjects=subjects,
                            page=page + delta,
                            is_last_page=is_last_page,
-                           is_first_page=is_first_page)
+                           is_first_page=is_first_page,
+                           day=request.args.get("period-day"))

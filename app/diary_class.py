@@ -73,6 +73,7 @@ class Diary:
         raw, self.session = get_raw_diary(self.session, self.guid, get_monday(d.today()))
         self.periods = get_periods(raw)
         self.quarters = get_periods(raw, is_quarters=True)
+        print(self.quarters)
 
         self.current = None
         for i in self.quarters:

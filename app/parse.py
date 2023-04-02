@@ -18,13 +18,16 @@ from app.useragent import get_header
 from app.utils import date_to_str, str_to_date
 
 
-def auth(login: str, password: str) -> requests.Session:
+def auth(login: str, password: str) -> Optional[requests.Session]:
     session = requests.Session()
     session.headers.update(get_header())
 
     url = 'https://passport.43edu.ru/auth/login'
     data = {'login': login, 'password': password, "submit": "submit", "returnTo": "https://one.43edu.ru"}
     session.post(url, data=data)
+
+    if not get_session_cookie(session):
+        return None
     return session
 
 
@@ -39,8 +42,8 @@ def get_guid(session: requests.Session) -> str:
     return guid
 
 
-def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], retry=True) -> Optional[
-    Tuple[dict, requests.Session]]:
+def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
+                  retry=True) -> Tuple[dict, requests.Session]:
     if isinstance(date, d):
         date = date_to_str(date)
 
@@ -53,6 +56,13 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], ret
     user = db.session.query(User).filter(User.guid == guid).first()
     if retry:
         sess = auth(user.email, user.get_password())
+        if sess is None:
+            db_sess = db.session
+            for i in user.sessions:
+                db_sess.delete(i)
+            db_sess.delete(user)
+            db_sess.commit()
+            return None, None
         cookie = get_session_cookie(sess)
         user.source_session = cookie
         db.session.commit()
@@ -61,7 +71,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d], ret
         return raw_diary, sess
     logging.error(f"Ошибка при получении данных. Сообщение: {json['message']}, guid: {guid}, "
                   f"session cookies: {session.cookies}")
-    return None
+    return None, None
 
 
 def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: str = None, final_grades: bool = False):
@@ -109,8 +119,8 @@ def get_latest_marks(diary, count: int):
 
 
 def get_session_cookie(session: requests.Session):
-    cookie = next(i for i in session.cookies if i.name == 'X1_SSO')
-    return cookie.value
+    cookie = next((i for i in session.cookies if i.name == 'X1_SSO'), None)
+    return cookie.value if cookie else None
 
 
 def get_periods(json, is_quarters=False):
@@ -126,10 +136,3 @@ def get_periods(json, is_quarters=False):
         if i["parentEduPeriodGuid"] == parent:
             quarters.append(i)
     return quarters
-
-
-if __name__ == "__main__":
-    s = auth("galkin.mihail.11.06@yandex.ru", "***REMOVED***")
-
-    date = d.today()
-    date -= td(days=date.weekday())

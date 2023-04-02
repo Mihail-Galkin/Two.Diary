@@ -1,3 +1,11 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.global-container {
+	min-height: calc(100vh - 108px);
+}
+
 /* variables */
 :root {
     --mark-5-color: #59e744;
@@ -11,6 +19,7 @@
     --bg-dark-color: #0D1117;
     --dark-accent-color: #21262D;
     --dark-border-color: #2F353B;
+    --dark-hr-color: #777777;
 
     --mark-dark: #0D1117;
 }
@@ -92,11 +101,11 @@
 
 /* footer */
 .footer {
-    padding: 2.5rem 0;
     color: #727272;
     text-align: center;
     background-color: #f9f9f9;
     border-top: .05rem solid #e5e5e5;
+    margin-top: 20px;
 }
 
 .footer p:last-child {
@@ -147,6 +156,17 @@ a {
     user-select: none; /* Non-prefixed version */
 }
 
+.arrow {
+    transition: 0.2s;
+    width: 1em;
+    height: 1em
+}
+
+.arrow:hover {
+    background: #eeeeee;
+    border-radius: 3px;
+}
+
 /* marks */
 
 .text-bg-2 {
@@ -181,6 +201,7 @@ a {
     color: var(--mark-5-color);
 }
 
+
 .bg-2 {
     background-color: var(--mark-2-color);
     color: white;
@@ -201,6 +222,10 @@ a {
     color: white;
 }
 
+.bg-NaN, .bg-0, .text-NaN, .text-0, .text-bg-NaN, .text-bg-0 {
+    display: none;
+}
+
 .loader {
     position: absolute;
     left: 0;
@@ -209,4 +234,62 @@ a {
     height: 100%;
     z-index: 9999;
     background: url('/static/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+    background-size: 50px 50px;
+}
+
+
+/* input:number */
+.number {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+}
+
+.number input[type="number"] {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+}
+
+.number input[type="number"]::-webkit-outer-spin-button,
+.number input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.number-minus {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    bottom: 1px;
+    width: 20px;
+    padding: 0;
+    display: block;
+    text-align: center;
+    border: none;
+    border-right: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.number-plus {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    width: 20px;
+    padding: 0;
+    display: block;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: 600;
 }

@@ -18,4 +18,4 @@ def subject_modal(diary):
 
     day = diary.get_day(str_to_date(date))
     subject = day.subjects[lesson]
-    return render_template("parts/subject-modal.html", subject=subject)
+    return render_template("parts/subject-modal.html", subject=subject, day=day)

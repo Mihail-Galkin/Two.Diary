@@ -11,6 +11,10 @@
     color: white;
 }
 
+[data-theme="dark"] h5 {
+    color: white !important;
+}
+
 [data-theme="dark"] .modal-content{
     background-color: var(--bg-dark-color);
     color: white;
@@ -41,9 +45,9 @@
 }
 
 [data-theme="dark"] hr {
-    background-color: var(--dark-border-color);
-    color: var(--dark-border-color);
-    border-color: var(--dark-border-color);
+    background-color: var(--dark-hr-color);
+    color: var(--dark-hr-color);
+    border-color: var(--dark-hr-color);
 }
 
 [data-theme="dark"] table {
@@ -65,4 +69,18 @@
     color: whitesmoke;
 }
 
+[data-theme="dark"] .arrow {
+    filter: invert(100%);
+}
 
+[data-theme="dark"] .loader {
+    background-color: var(--bg-dark-color);
+}
+
+[data-theme="dark"] .diary-header {
+    background-color: var(--dark-accent-color) !important;
+}
+
+[data-theme="dark"] .number {
+    filter: invert(100%);
+}

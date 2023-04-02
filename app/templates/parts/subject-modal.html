@@ -21,11 +21,11 @@
                     <hr class="my-1">
                     <h5 class="fw-bolder">Оценки:</h5>
                     {% for mark in subject.marks %}
-                        <p class="badge text-bg-{{ mark }}">{{ mark }}</p>
+                        <p class="badge text-bg-{{ mark }} m-0">{{ mark }}</p>
                     {% endfor %}
                 {% endif %}
                 <hr>
-                <button type="button" class="btn btn-secondary open-ots" data-subject="{{ subject.name }}">Показать уроки</button>
+                <button type="button" class="btn btn-secondary open-ots" data-subject="{{ subject.name }}" data-date="{{ day.str_date }}">Показать уроки</button>
             </div>
         </div>
     </div>

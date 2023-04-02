@@ -1,19 +1,18 @@
 <div class="date" data-date="{{ week.days[0].str_date }}"></div>
 
-<div class="container-fluid d-flex justify-content-between p-1">
+<div class="container-fluid d-flex justify-content-between p-1 bg-secondary-subtle rounded align-items-center mb-2 diary-header">
     <div class="ms-1 text-dark-emphasis pointer prev-week">
-        <img src='/static/images/arrow-left.svg' alt="some file" style="width: 1em; height: 1em">
+        <img src='/static/images/arrow-left.svg' alt="←" class="arrow pointer">
     </div>
-    <div>
+    <div class="p-1 rounded ps-2 pe-2 fw-semibold">
         {{ week.days[0].str_date }}-{{ week.days[6].str_date }}
     </div>
     <div class="me-1 text-dark-emphasis pointer next-week">
-        <img src='/static/images/arrow-right.svg' alt="some file" style="width: 1em; height: 1em">
+        <img src='/static/images/arrow-right.svg' alt="→" class="arrow pointer">
     </div>
 </div>
 
 {% for day in week.days[:-1] %}
-
     {% if loop.index0 % 2 == 0 %}
         <div class="row g-2 mb-2">
     {% endif %}

@@ -17,6 +17,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         sess = auth(form.email.data, form.password.data)
+        if sess is None:
+            return render_template('login.html', title='Авторизация', message="Неверный пароль", form=form)
         cookie = get_session_cookie(sess)
 
         db_sess = db.session
@@ -45,7 +47,6 @@ def login():
 
 @bp.route("/logout")
 def logout():
-    logging.error(session)
     if "session" not in session.keys():
         return redirect("/")
     sess = session.pop("session")

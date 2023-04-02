@@ -15,9 +15,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 
-
     <link href="/static/styles/style.css" rel="stylesheet">
     <link href="/static/styles/dark-theme.css" rel="stylesheet">
+    <link href="/static/styles/theme-switcher.css" rel="stylesheet">
 
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 
@@ -26,55 +26,54 @@
 
 <body>
 
+<div class="wrapper">
+    <div class="global-container">
+        <div class="container">
+            <header class="header lh-1 py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-4"></div>
+                    <div class="col-4 text-center">
+                        <a class="header-logo" href="/">Two.Diary</a>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <a class="btn btn-sm btn-outline-secondary" href="/logout">Выйти</a>
+                    </div>
+                </div>
+            </header>
 
-<div class="container">
-    <header class="header lh-1 py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4"></div>
-            <div class="col-4 text-center">
-                <a class="header-logo" href="/">Two.Diary</a>
-            </div>
-            <div class="col-4 d-flex justify-content-end">
-                <a class="btn btn-sm btn-outline-secondary" href="/logout">Выйти</a>
+
+            <div class="nav-scroller py-1 mb-2 links-header">
+                <nav class="nav d-flex justify-content-around">
+                    <a class="p-2 link-secondary home pointer">Главная</a>
+                    <a class="p-2 link-secondary diary pointer">Дневник</a>
+                    <a class="p-2 link-secondary marks pointer">Оценки</a>
+                    <a class="p-2 link-secondary schedule pointer">КФМЛ</a>
+
+                </nav>
             </div>
         </div>
-    </header>
-
-
-    <div class="nav-scroller py-1 mb-2 links-header">
-        <nav class="nav d-flex justify-content-around">
-            <a class="p-2 link-secondary home pointer">Главная</a>
-            <a class="p-2 link-secondary diary pointer">Дневник</a>
-            <a class="p-2 link-secondary marks pointer">Оценки</a>
-            <a class="p-2 link-secondary schedule pointer">КФМЛ</a>
-
-        </nav>
+        <main class="container">
+        </main>
+        <div class="modal-container"></div>
     </div>
+
+    <footer class="footer">
+        <div class="d-inline-flex justify-content-center" style="transform: scale(0.3, 0.3);">
+            <input type="checkbox" id="darkSwitch" class="toggle--checkbox">
+            <label for="darkSwitch" class="toggle--label">
+                <span class="toggle--label-background"></span>
+            </label>
+        </div>
+
+        {#    <div>#}
+        {#        <p>Обратная связь: <a href="https://t.me/galkin_mihail" target="_blank">telegram</a>, почта <a#}
+        {#                href="mailto:galkin.mihail.11.06@yandex.ru" target="_blank">galkin.mihail.11.06@yandex.ru</a></p>#}
+        {#    </div>#}
+
+
+    </footer>
 </div>
 
-
-<main class="container">
-</main>
-
-<div class="modal-container"></div>
-
-
-<footer class="footer mt-4">
-
-    <div>
-        <div class="form-check form-switch d-inline-flex justify-content-center">
-            <input class="form-check-input d-block mx-1" id="darkSwitch" type="checkbox">
-            <label class="form-check-label text-start" for="darkSwitch">Поменять тему</label>
-        </div>
-    </div>
-{#    <div>#}
-{#        <p>Обратная связь: <a href="https://t.me/galkin_mihail" target="_blank">telegram</a>, почта <a#}
-{#                href="mailto:galkin.mihail.11.06@yandex.ru" target="_blank">galkin.mihail.11.06@yandex.ru</a></p>#}
-{#    </div>#}
-
-
-
-</footer>
 
 <script src="{{ url_for('static', filename='scripts/dark-mode-switch.js') }}"></script>
 <script crossorigin="anonymous"

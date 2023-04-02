@@ -85,8 +85,12 @@ main.on("click", ".marks", function (event) {
     let modal = $('#marks-modal')
 
     $("#marksModalLabel").html(clicked.data("subject"));
-    modal.data("sum", clicked.data("sum"))
-    modal.data("count", clicked.data("count"))
+    modal.data("sum", clicked.data("sum"));
+    modal.data("count", clicked.data("count"));
+    for (let i = 1; i <= 5; i++) {
+        $("#count-" + i).prop("min", "-" + clicked.data("count-" + i))
+    }
+
     modal.modal('show');
 
     let sum = parseInt(modal.data("sum"), 10);
@@ -114,11 +118,12 @@ main.on("submit", "#marks-modal", function (e) {
     let count = parseInt(modal.data("count"), 10);
 
     for (let i = 2; i <= 5; i++) {
-        let n = parseInt($(".count-" + i).val(), 10);
+        let n = parseInt($("#count-" + i).val(), 10);
         avg_mark.removeClass("text-bg-" + i);
         sum += n * i;
         count += n;
     }
+    avg_mark.removeClass("text-bg-NaN");
     avg_mark.html((sum / count).toFixed(2) + "");
     avg_mark.addClass("text-bg-" + Math.round(sum / count));
 });
@@ -127,7 +132,7 @@ main.on("submit", "#marks-modal", function (e) {
 main.on("hide.bs.modal", "#marks-modal", function () {
     let avg_mark = $(".avg-mark");
     for (let i = 2; i <= 5; i++) {
-        $(".count-" + i).val("0");
+        $("#count-" + i).val("0");
         avg_mark.removeClass("text-bg-" + i);
     }
     avg_mark.html("");
@@ -146,7 +151,8 @@ main.on("click", ".ots-next-page", function () {
         "last-subject": ots.data("last-subject"),
         "first-subject": ots.data("first-subject"),
         "delta": 1,
-        "page": ots.data("page")
+        "page": ots.data("page"),
+        "period-day": ots.data("day")
     })
 });
 
@@ -159,12 +165,13 @@ main.on("click", ".ots-prev-page", function () {
         "last-subject": ots.data("last-subject"),
         "first-subject": ots.data("first-subject"),
         "delta": -1,
-        "page": ots.data("page")
+        "page": ots.data("page"),
+        "period-day": ots.data("day")
     })
 });
 
 $(".modal-container").on("click", ".open-ots", function () {
-    change_page("one-type-subjects", "main", {"subject": $(this).data("subject")});
+    change_page("one-type-subjects", "main", {"subject": $(this).data("subject"), "period-day": $(this).data("date")});
     $('#subject-modal').modal('hide');
 
 })
