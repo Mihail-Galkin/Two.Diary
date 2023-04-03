@@ -84,3 +84,11 @@
 [data-theme="dark"] .number {
     filter: invert(100%);
 }
+
+[data-theme="dark"] button.btn-close {
+    filter: invert(100%);
+}
+
+[data-theme="dark"] .search {
+    filter: invert(100%);
+}

@@ -9,12 +9,24 @@
                 <h5 class="fw-bolder">Тема:</h5>
                 <p class="word-break">{{ subject.theme }}</p>
                 <hr class="my-1">
-                <h5 class="fw-bolder">Домашнее задание:</h5>
+                <div class="d-flex justify-content-between">
+                    <h5 class="fw-bolder">Домашнее задание:</h5>
+                    <a href="https://www.google.ru/search?q={{ subject.homework }}" target="_blank">
+                        <img src="/static/images/box-arrow-up-right.svg" class="search" alt="Поиск в интернете">
+                    </a>
+                </div>
+
                 <p class="word-break">{{ subject.homework }}</p>
                 {% if subject.previous_homework["date"] %}
                     <hr class="my-1">
-                    <h5 class="fw-bolder">Домашнее задание с прошлого урока
-                        ({{ subject.previous_homework["date"] }}):</h5>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="fw-bolder">Домашнее задание с прошлого урока
+                            ({{ subject.previous_homework["date"] }}):</h5>
+                        <a href="https://www.google.ru/search?q={{ subject.previous_homework["homework"] }}"
+                           target="_blank">
+                            <img src="/static/images/box-arrow-up-right.svg" class="search" alt="Поиск в интернете">
+                        </a>
+                    </div>
                     <p class="word-break">{{ subject.previous_homework["homework"] }}</p>
                 {% endif %}
                 {% if subject.marks %}
@@ -25,7 +37,9 @@
                     {% endfor %}
                 {% endif %}
                 <hr>
-                <button type="button" class="btn btn-secondary open-ots" data-subject="{{ subject.name }}" data-date="{{ day.str_date }}">Показать уроки</button>
+                <button type="button" class="btn btn-secondary open-ots" data-subject="{{ subject.name }}"
+                        data-date="{{ day.str_date }}">Показать уроки
+                </button>
             </div>
         </div>
     </div>
