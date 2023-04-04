@@ -17,7 +17,6 @@ def marks_(diary):
     live_mode = False
     if request.args.get("selected") == "Итоговые оценки":
         raw_marks = get_raw_marks(diary.session, diary.guid, final_grades=True)
-        print(raw_marks)
 
         for i in raw_marks:
             int_marks = list(map(int, list(filter(bool, (i[2:5])))))
@@ -25,18 +24,21 @@ def marks_(diary):
                 average = 0
             else:
                 average = round(sum(int_marks) / len(int_marks), 2)
-            marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks), "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3), "count_2": int_marks.count(2)}
+            marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks),
+                           "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3),
+                           "count_2": int_marks.count(2)}
     elif request.args.get("selected") == "Live":
         live_mode = True
         date = str_to_date(diary.current["dateBegin"])
+        print(date)
         while date <= d.today():
-            date += td(days=1)
             day = diary.get_day(date)
             for i, subject in day.subjects.items():
                 for mark in subject.marks:
                     if subject.name not in marks:
                         marks[subject.name] = {"marks": []}
                     marks[subject.name]["marks"].append({"value": int(mark), "date": day.str_date, "subject_index": i})
+            date += td(days=1)
 
         for subject in marks:
             summ = sum(list(map(lambda x: x["value"], marks[subject]["marks"])))
@@ -63,7 +65,9 @@ def marks_(diary):
             else:
                 int_marks = list(map(int, i[2].split(",")))
                 average = round(sum(int_marks) / len(int_marks), 2)
-            marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks), "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3), "count_2": int_marks.count(2)}
+            marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks),
+                           "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3),
+                           "count_2": int_marks.count(2)}
 
     return render_template("marks.html", marks=marks,
                            periods=diary.quarters + [{"name": "Итоговые оценки"}, {"name": "Live"}],
