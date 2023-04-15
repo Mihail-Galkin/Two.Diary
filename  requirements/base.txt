@@ -12,6 +12,5 @@ Flask-WTF
 WTForms
 email_validator
 lxml
-psycopg2
 certifi
 python-dotenv
