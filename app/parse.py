@@ -1,16 +1,24 @@
+"""
+Содержит набор функций для получения информации с one.43edu.ru:
+    auth                 Авторизирует пользователя
+    get_guid             Получает id пользователя
+    get_raw_diary        Получает данные о неделе
+    get_raw_marks        Получает данные о оценках
+    get_latest_marks     Получает последние оценки текущей четверти с информацией о днях выставления
+    get_session_cookie   Получает сессионный куки для быстрого восстановления сессии
+    get_periods          Возвращает учебные периоды
+"""
 import csv
-import json
 import logging
-import os
 from datetime import date as d
 from datetime import timedelta as td
-from typing import Union, Tuple, Optional
+from typing import Union, Tuple, Optional, Any
 
-import certifi
 import pandas as pd
 import requests
 import xlrd
 from bs4 import BeautifulSoup, SoupStrainer
+from requests import Session
 
 from app import db
 from app.models.users import User
@@ -19,6 +27,13 @@ from app.utils import date_to_str, str_to_date
 
 
 def auth(login: str, password: str) -> Optional[requests.Session]:
+    """
+    Авторизирует пользователя
+
+    :param login: Логин пользователя (почта или СНИЛС)
+    :param password: Пароль пользователя
+    :return: Сессия пользователя (requests.Session) или None если произошла ошибка
+    """
     session = requests.Session()
     session.headers.update(get_header())
 
@@ -32,6 +47,12 @@ def auth(login: str, password: str) -> Optional[requests.Session]:
 
 
 def get_guid(session: requests.Session) -> str:
+    """
+    Получает id пользователя
+
+    :param session: Сессия пользователя
+    :return: guid
+    """
     response = session.get("https://one.43edu.ru/edv/index/participant")
 
     strainer = SoupStrainer("div", {"id": "participant"})
@@ -43,7 +64,17 @@ def get_guid(session: requests.Session) -> str:
 
 
 def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
-                  retry=True) -> Tuple[dict, requests.Session]:
+                  retry=True) -> Union[tuple[None, None], tuple[dict, Session]]:
+    """
+    Получает данные о неделе
+
+    :param session: Сессия пользователя
+    :param guid: Guid пользователя
+    :param date: Дата для получения
+    :param retry: Пытаться ли переподключиться в случае ошибки
+    :return: Кортеж из json ответа от one.43edu.ru и сессии. В ответе содержатся дни от заданного до конца недели, а
+         также данные о учебных периодах
+    """
     if isinstance(date, d):
         date = date_to_str(date)
 
@@ -74,9 +105,17 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
     return None, None
 
 
-def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: str = None, final_grades: bool = False):
+def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: str = None,
+                  final_grades: bool = False) -> list:
     """
-    про нет в строке
+    Получает данные о оценках. Необходимо указать период, либо final_grades=True.
+    Если оценки отсутствуют, будет записано "нет" !!
+
+    :param session: Сессия пользователя
+    :param guid: Guid пользователя
+    :param begin: Начала периода (строка в формате DD.MM.YYYY)
+    :param end: Конец периода (строка в формате DD.MM.YYYY)
+    :param final_grades: Итоговые оценки
     """
     if final_grades:
         url = "https://one.43edu.ru/edv/index/report/period/" + guid
@@ -95,7 +134,14 @@ def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: 
     return list(rows)
 
 
-def get_latest_marks(diary, count: int):
+def get_latest_marks(diary, count: int) -> list:
+    """
+    Получает последние оценки текущей четверти с указанием даты и урока для каждой оценки.
+
+    :param diary: Переменная дневника
+    :param count: Количество оценок для полчуения
+    :return: Оценки в формате [{"subject": "...", "mark": "...", "date": "...", lesson: ...}, ...]
+    """
     date = d.today()
     marks = []
     quarters = diary.quarters
@@ -118,12 +164,26 @@ def get_latest_marks(diary, count: int):
     return marks
 
 
-def get_session_cookie(session: requests.Session):
+def get_session_cookie(session: requests.Session) -> Optional[str]:
+    """
+    Возвращает сессионное куки для быстрого восстановления сессии
+
+    :param session: Сессия пользователя
+    :return: Сессионный куки, либо None, если произошла ошибка
+    """
     cookie = next((i for i in session.cookies if i.name == 'X1_SSO'), None)
     return cookie.value if cookie else None
 
 
 def get_periods(json, is_quarters=False):
+    """
+    Возвращает учебные периоды.
+
+    :param json: Ответ от сервера, возвращаемый get_raw_diary
+    :param is_quarters: Возвращать все периоды или только четверти
+    :return: Учебные периоды в формате [{'schoolEduPeriodGuid': '...', 'eduPeriodGuid': '...',
+        'parentEduPeriodGuid': '...', 'name': '...', 'dateBegin': '...', 'dateEnd': '...'}, ...]
+    """
     edu_periods = json["data"]["edu_periods"]
     if not is_quarters:
         return edu_periods

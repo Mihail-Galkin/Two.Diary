@@ -1,3 +1,9 @@
+"""
+Модуль, содержащий декораторы:
+    only_ajax           допускает только запросы из javascript
+    login_required      допускает к странице только авторизированных пользователей, добавляет в аргументы
+        функции дневник
+"""
 import functools
 from typing import Callable
 
@@ -9,15 +15,16 @@ from app.utils import get_user
 
 
 def only_ajax() -> Callable:
+    """
+    Декоратор допускает только запросы с аргументом ajax == 1
+    """
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             if int(request.args.get("ajax", "0")) != 1:
                 abort(403)
             return func(*args, **kwargs)
-
         return wrapper
-
     return decorator
 
 
@@ -25,6 +32,12 @@ diaries = {}
 
 
 def login_required(recreate_diary: bool = False) -> Callable:
+    """
+    Декоратор получает информацию о пользователе при помощи сессионного куки. Если пользователь не авторизован,
+    отправляет на страницу авторизации. Передает дневник в качестве дполнительного параметра
+
+    :param recreate_diary: Нужно ли пересоздавать дневник (для обновления закэшированной информации)
+    """
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
@@ -38,7 +51,5 @@ def login_required(recreate_diary: bool = False) -> Callable:
                 diary = Diary(user.source_session, user.guid)
                 diaries[sess_cookie] = diary
             return func(diary, *args, **kwargs)
-
         return wrapper
-
     return decorator

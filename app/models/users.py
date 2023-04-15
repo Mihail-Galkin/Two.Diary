@@ -21,7 +21,7 @@ class User(db.Model):
         return f'<User> {self.id} {self.email} {self.guid}'
 
     def set_password(self, password):
-        self.password = xor(password, os.getenv("PASSWORD_KEY"))
+        self.password = xor(password, os.environ["PASSWORD_KEY"])
 
     def get_password(self):
-        return xor(self.password, os.getenv("PASSWORD_KEY"))
+        return xor(self.password, os.environ["PASSWORD_KEY"])

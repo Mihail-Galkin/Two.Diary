@@ -30,7 +30,6 @@ def marks_(diary):
     elif request.args.get("selected") == "Live":
         live_mode = True
         date = str_to_date(diary.current["dateBegin"])
-        print(date)
         while date <= d.today():
             day = diary.get_day(date)
             for i, subject in day.subjects.items():
@@ -47,10 +46,8 @@ def marks_(diary):
             marks[subject]["sum"] = summ
             marks[subject]["count"] = count
 
-
-    # TODO abc
     # Default marks: {"Информатика": {"marks": [2, 3], "average": 2.5}, ...}
-    # Live mode: {"Информатика": {"marks": [{} "average": 2.5}, ...}
+    # Live mode: {"Информатика": {"marks": [{"value": ..., "date": ..., "subject_index": ...}], "average": ...}, ...}
 
     else:
         date_begin = request.args.get("begin", diary.current["dateBegin"])
