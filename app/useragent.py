@@ -2,7 +2,7 @@
 Реализует поддельный User-Agent
 
 Функции:
-    get_header          Возвращает заголовок с поддельным User-Agent
+    1. get_header - возвращает заголовок с поддельным User-Agent
 """
 from fake_useragent import UserAgent
 

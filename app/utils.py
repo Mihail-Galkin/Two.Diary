@@ -1,10 +1,10 @@
 """
 Содержит вспомогательные функции:
-    get_monday               Возвращает дату понедельника недели, заданного дня
-    str_to_date              Переводит дату строчного формата в datetime.datetime
-    date_to_str              Переводит дату datetime.date в строчный формат
-    get_readable_date        Переводит datetime.date в читаемый формат
-    get_user                 Возвращает пользователя по его session cookie
+    1. get_monday - Возвращает дату понедельника недели, заданного дня
+    2. str_to_date - Переводит дату строчного формата в datetime.datetime
+    3. date_to_str - Переводит дату datetime.date в строчный формат
+    4. get_readable_date - Переводит datetime.date в читаемый формат
+    5. get_user - Возвращает пользователя по его session cookie
 """
 from datetime import date as d
 from datetime import datetime as dt
@@ -33,7 +33,7 @@ def str_to_date(str_date: str) -> d:
     """
     Переводит дату строчного формата в datetime.datetime
 
-    :param str_date: Дата - строка в формате DD.MM.YYYY
+    :param str_date: Дата - строка в формате *DD.MM.YYYY*
     :return: Дата datetime.date
     """
     return dt.strptime(str_date, "%d.%m.%Y").date()
@@ -44,7 +44,7 @@ def date_to_str(date: d) -> str:
     Переводит дату datetime.date в строчный формат
 
     :param date: Дата datetime.date
-    :return: Дата - строка в формате DD.MM.YYYY
+    :return: Дата - строка в формате *DD.MM.YYYY*
     """
     return date.strftime("%d.%m.%Y")
 
@@ -54,7 +54,7 @@ def get_readable_date(date: d) -> str:
     Переводит datetime.date в читаемый формат
 
     :param date: Дата datetime.date
-    :return: Дата в формате "Weekday, DD month"
+    :return: Дата в формате *"Weekday, DD month"*
     """
     formatted_date = format_datetime(date, "EEEE, d MMMM", locale="ru").capitalize()
     return formatted_date
