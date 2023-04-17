@@ -41,7 +41,7 @@ class Subject:
 
 @dataclass
 class Day:
-    """Класс хранит информацию о уроке"""
+    """Класс хранит информацию об уроке"""
     subjects: typing.Dict[int, Subject]
     date: d
     formatted_date: str = field(init=False)

@@ -73,7 +73,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
     :param date: Дата для получения
     :param retry: Пытаться ли переподключиться в случае ошибки
     :return: Кортеж из json ответа от one.43edu.ru и сессии. В ответе содержатся дни от заданного до конца недели, а
-         также данные о учебных периодах
+         также данные об учебных периодах
     """
     if isinstance(date, d):
         date = date_to_str(date)
@@ -108,7 +108,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
 def get_raw_marks(session: requests.Session, guid: str, begin: str = None, end: str = None,
                   final_grades: bool = False) -> list:
     """
-    Получает данные о оценках. Необходимо указать период, либо final_grades=True.
+    Получает данные об оценках. Необходимо указать период, либо final_grades=True.
     **Если оценки отсутствуют, будет записано "нет"**
 
     :param session: Сессия пользователя

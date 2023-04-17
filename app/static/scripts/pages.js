@@ -10,7 +10,7 @@ function change_page(page, dest, args = {}, success = function () {
             success();
         },
         error: function (xhr) {
-            alert("error");
+            alert("Ошибка сервера. Перезагрузка страницы может помочь");
         }
     })
 }
