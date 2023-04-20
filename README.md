@@ -1,4 +1,6 @@
 # Two.Diary
+[![Группа в ВК](https://img.shields.io/badge/вконтакте-%232E87FB.svg?&style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/public219719675)
+[![Schedule bot](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mihail-Galkin/kpml-schedule)
 ## Основная информация
 Сайт, расширяющий возможности электронного [дневника](https://one.43edu.ru), представленного правительством Кировской области. 
 
