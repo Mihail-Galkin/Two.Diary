@@ -23,3 +23,19 @@ pip install -r requirements/development.txt
 ```
 pip install -r requirements/production.txt
 ```
+
+### Переменные окружения
+Для работы пиложения, необходимо установить переменные среды:
++ FLASK_ENV (development или production)
++ SECRET_KEY
++ PASSWORD_KEY
++ DATABASE_URL
+
+### Структура проекта
++ app - главный пакет приложения
++ В \_\_init\_\_.py файле инициализируются расширения flask, добавляются маршрутизаторы
++ В extensions.py создаются переменные расширений flask
++ Маршрутизаторы - это подпакеты app
+
+Подробнее о структуре можно узнать из docstrings
+
