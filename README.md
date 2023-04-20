@@ -44,4 +44,4 @@ pip install -r requirements/production.txt
 ## Яндекс.Лицей
 Материалы для защиты:
 + [Презентация](https://disk.yandex.ru/i/j0kRVWhw4-CsWw)
-+ [ТЗ]()
++ [ТЗ](https://disk.yandex.ru/d/Bx_FEYURkONFQw)
