@@ -23,7 +23,7 @@
 
                     <h5 class="mb-1">{{ subject.name }}</h5>
                     <p class="text-secondary mb-1 one-line-text">{{ subject.theme }}</p>
-                    <p class="mb-1 one-line-text">{{ subject.homework }}</p>
+                    <p class="mb-1 one-line-text urlify">{{ subject.homework }}</p>
                     {% for mark in subject.marks %}
                         <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
                     {% endfor %}

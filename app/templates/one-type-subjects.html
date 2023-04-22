@@ -15,7 +15,7 @@
 
             <h4 class="mb-1">{{ day.subjects[i].name }}</h4>
             <p class="text-secondary mb-1 one-line-text">{{ day.subjects[i].theme }}</p>
-            <p class="mb-1 one-line-text">{{ day.subjects[i].homework }}</p>
+            <p class="mb-1 one-line-text urlify">{{ day.subjects[i].homework }}</p>
             {% for mark in day.subjects[i].marks %}
                 <span class="badge text-bg-{{ mark }}">{{ mark }}</span>
             {% endfor %}

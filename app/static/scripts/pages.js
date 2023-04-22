@@ -8,6 +8,13 @@ function change_page(page, dest, args = {}, success = function () {
         success: function (data) {
             $(dest).html(data);
             success();
+
+            $(".urlify").each(function (element) {
+                console.log(this.innerHTML);
+                this.innerHTML = urlify(this.innerHTML);
+                $(this).removeClass();
+            });
+
         },
         error: function (xhr) {
             alert("Ошибка сервера. Перезагрузка страницы может помочь");

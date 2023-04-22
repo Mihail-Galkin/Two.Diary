@@ -16,7 +16,7 @@
                     </a>
                 </div>
 
-                <p class="word-break">{{ subject.homework }}</p>
+                <p class="word-break urlify">{{ subject.homework }}</p>
                 {% if subject.previous_homework["date"] %}
                     <hr class="my-1">
                     <div class="d-flex justify-content-between">
@@ -27,7 +27,7 @@
                             <img src="/static/images/box-arrow-up-right.svg" class="search" alt="Поиск в интернете">
                         </a>
                     </div>
-                    <p class="word-break">{{ subject.previous_homework["homework"] }}</p>
+                    <p class="word-break urlify">{{ subject.previous_homework["homework"] }}</p>
                 {% endif %}
                 {% if subject.marks %}
                     <hr class="my-1">
