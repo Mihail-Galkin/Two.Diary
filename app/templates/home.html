@@ -33,19 +33,28 @@
             <div class="row g-2">
                 <div>
                     <div class="border rounded-3 p-0 block">
-                        <div id="vk_groups"></div>
-                        <script type="text/javascript">
-                            VK.Widgets.Group("vk_groups", {
-                                mode: 4,
-                                no_cover: 1,
-                                wide: 1,
-                                color1: "FFFFFF",
-                                color2: "000000",
-                                color3: "5181B8",
-                                width: "auto",
-                                height: 500
-                            }, 219719675);
-                        </script>
+                        <div>
+                            <div id="vk_widget"></div>
+                            <script type="text/javascript">
+                                function VK_Widget_Init() {
+                                    document.getElementById('vk_widget').innerHTML = '<div id="vk_groups"></div>';
+                                    VK.Widgets.Group("vk_groups", {
+                                        mode: 4,
+                                        no_cover: 1,
+                                        height: 500,
+                                        width: "auto",
+                                        color1: "FFFFFF",
+                                        color2: "000000",
+                                        color3: "5181B8"
+                                    }, 219719675);
+                                }
+
+                                VK_Widget_Init();
+                                window.addEventListener('load', VK_Widget_Init, false);
+                                window.addEventListener('resize', VK_Widget_Init, false);
+                            </script>
+                        </div>
+
                     </div>
                 </div>
             </div>

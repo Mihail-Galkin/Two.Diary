@@ -1,20 +1,24 @@
 function change_page(page, dest, args = {}, success = function () {
 }) {
-    $(dest).html('<div class="loader"></div>');
+    $("#loader").removeClass("d-none");
+    $(".wrapper").addClass("d-none");
     $.ajax({
         url: "/" + page,
         type: "get",
         data: Object.assign({}, args, {"ajax": 1}),
         success: function (data) {
             $(dest).html(data);
-            success();
-
+            $("#loader").addClass("d-none");
+            $(".wrapper").removeClass("d-none");
             $(".urlify").each(function (element) {
-                console.log(this.innerHTML);
                 this.innerHTML = urlify(this.innerHTML);
                 $(this).removeClass();
             });
-
+            try {
+                VK_Widget_Init();
+            } catch (e) {
+            }
+            success();
         },
         error: function (xhr) {
             alert("Ошибка сервера. Перезагрузка страницы может помочь");

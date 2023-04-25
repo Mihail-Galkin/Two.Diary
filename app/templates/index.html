@@ -20,7 +20,7 @@
     <link href="/static/styles/dark-theme.css" rel="stylesheet">
     <link href="/static/styles/theme-switcher.css" rel="stylesheet">
 
-    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+    <script src="https://vk.com/js/api/openapi.js?168" type="text/javascript"></script>
 
 
 </head>
@@ -57,7 +57,7 @@
         <div class="modal-container"></div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer h-50">
         <div class="d-inline-flex justify-content-center" style="transform: scale(0.3, 0.3);">
             <input type="checkbox" id="darkSwitch" class="toggle--checkbox">
             <label for="darkSwitch" class="toggle--label">
@@ -72,8 +72,9 @@
 
 
     </footer>
-</div>
 
+</div>
+<div id="loader" class="d-none"></div>
 
 <script src="{{ url_for('static', filename='scripts/dark-mode-switch.js') }}"></script>
 <script crossorigin="anonymous"

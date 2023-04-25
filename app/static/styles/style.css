@@ -1,9 +1,10 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 .global-container {
-	min-height: calc(100vh - 108px);
+    min-height: calc(100vh - 108px);
 }
 
 /* variables */
@@ -226,7 +227,8 @@ a {
     display: none;
 }
 
-.loader {
+
+#loader {
     position: absolute;
     left: 0;
     top: 0;
