@@ -12,7 +12,7 @@ function change_page(page, dest, args = {}, success = function () {
             $(".wrapper").removeClass("d-none");
             $(".urlify").each(function (element) {
                 this.innerHTML = urlify(this.innerHTML);
-                $(this).removeClass();
+                $(this).removeClass("urlify");
             });
             try {
                 VK_Widget_Init();
