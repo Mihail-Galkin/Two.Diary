@@ -57,5 +57,10 @@
     filter: invert(100%);
 }
 
+[data-bs-theme="dark"] .social {
+    filter: invert(100%);
+}
 
-
+[data-bs-theme="dark"] .bi {
+    filter: invert(100%);
+}
