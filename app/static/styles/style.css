@@ -1,10 +1,12 @@
+/*  sticky footer  */
+
 * {
     margin: 0;
     padding: 0;
 }
 
 .global-container {
-    min-height: calc(100vh - 128px);
+    min-height: calc(100vh - 98px);
 }
 
 /* variables */
@@ -14,20 +16,18 @@
     --mark-3-color: #ed9121;
     --mark-2-color: rgb(187, 59, 56);
     --accent-color: #294262;
-    --bg-light-color: #ebf9fc;
-    --light-border-color: #fafafa;
+    --block-bg: #fff;
+    --block-header: #f8f9fa;
+    --footer-bg: #f9f9f9;
+}
 
-    --bg-dark-color: #0D1117;
-    --dark-accent-color: #21262D;
-    --dark-border-color: #2F353B;
-    --dark-hr-color: #777777;
-
-    --mark-dark: #0D1117;
+.block {
+    background-color: var(--block-bg);
 }
 
 /* header */
 .header {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--bs-border-color);
 }
 
 
@@ -69,8 +69,8 @@
     font-size: 0.8em;
 }
 
-.one-day-header {
-    background-color: var(--light-border-color);
+.one-day-header, .diary-header {
+    background-color: var(--block-header);
 }
 
 .mark-card {
@@ -102,10 +102,9 @@
 
 /* footer */
 .footer {
-    color: #727272;
     text-align: center;
-    background-color: #f9f9f9;
-    border-top: .05rem solid #e5e5e5;
+    background-color: var(--footer-bg);
+    border-top: .05rem solid var(--bs-border-color);
     margin-top: 20px;
 }
 
@@ -122,12 +121,7 @@
 }
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
@@ -143,8 +137,20 @@ a {
     color: var(--accent-color);
 }
 
-.word-break {
-    word-break: break-all;
+
+.modal-content {
+    background-color: var(--block-bg);
+}
+
+#loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/static/images/loading.gif') 50% 50% no-repeat var(--bs-body-bg);
+    background-size: 50px 50px;
 }
 
 .pointer {
@@ -166,132 +172,4 @@ a {
 .arrow:hover {
     background: #eeeeee;
     border-radius: 3px;
-}
-
-/* marks */
-
-.text-bg-2 {
-    background-color: var(--mark-2-color);
-}
-
-.text-bg-3 {
-    background-color: var(--mark-3-color);
-}
-
-.text-bg-4 {
-    background-color: var(--mark-4-color);
-}
-
-.text-bg-5 {
-    background-color: var(--mark-5-color);
-}
-
-.text-2 {
-    color: var(--mark-2-color);
-}
-
-.text-3 {
-    color: var(--mark-3-color);
-}
-
-.text-4 {
-    color: var(--mark-4-color);
-}
-
-.text-5 {
-    color: var(--mark-5-color);
-}
-
-
-.bg-2 {
-    background-color: var(--mark-2-color);
-    color: white;
-}
-
-.bg-3 {
-    background-color: var(--mark-3-color);
-    color: white;
-}
-
-.bg-4 {
-    background-color: var(--mark-4-color);
-    color: white;
-}
-
-.bg-5 {
-    background-color: var(--mark-5-color);
-    color: white;
-}
-
-.bg-NaN, .bg-0, .text-NaN, .text-0, .text-bg-NaN, .text-bg-0 {
-    display: none;
-}
-
-
-#loader {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background: url('/static/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
-    background-size: 50px 50px;
-}
-
-
-/* input:number */
-.number {
-    display: inline-block;
-    position: relative;
-    width: 100px;
-}
-
-.number input[type="number"] {
-    display: block;
-    height: 32px;
-    line-height: 32px;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-align: center;
-    -moz-appearance: textfield;
-    -webkit-appearance: textfield;
-    appearance: textfield;
-}
-
-.number input[type="number"]::-webkit-outer-spin-button,
-.number input[type="number"]::-webkit-inner-spin-button {
-    display: none;
-}
-
-.number-minus {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    bottom: 1px;
-    width: 20px;
-    padding: 0;
-    display: block;
-    text-align: center;
-    border: none;
-    border-right: 1px solid #ddd;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.number-plus {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    bottom: 1px;
-    width: 20px;
-    padding: 0;
-    display: block;
-    text-align: center;
-    border: none;
-    border-left: 1px solid #ddd;
-    font-size: 16px;
-    font-weight: 600;
 }

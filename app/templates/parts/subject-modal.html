@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <h5 class="fw-bolder">Тема:</h5>
-                <p class="word-break">{{ subject.theme }}</p>
+                <p>{{ subject.theme }}</p>
                 <hr class="my-1">
                 <div class="d-flex justify-content-between">
                     <h5 class="fw-bolder">Домашнее задание:</h5>
@@ -16,7 +16,7 @@
                     </a>
                 </div>
 
-                <p class="word-break urlify">{{ subject.homework }}</p>
+                <p class="urlify">{{ subject.homework }}</p>
                 {% if subject.previous_homework["date"] %}
                     <hr class="my-1">
                     <div class="d-flex justify-content-between">
@@ -27,7 +27,7 @@
                             <img src="/static/images/box-arrow-up-right.svg" class="search" alt="Поиск в интернете">
                         </a>
                     </div>
-                    <p class="word-break urlify">{{ subject.previous_homework["homework"] }}</p>
+                    <p class="urlify">{{ subject.previous_homework["homework"] }}</p>
                 {% endif %}
                 {% if subject.marks %}
                     <hr class="my-1">

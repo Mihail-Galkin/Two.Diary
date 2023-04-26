@@ -18,4 +18,4 @@ def schedule():
         a["target"] = "_blank"
     div = soup.find("div")
 
-    return f'<div class="border rounded-3 p-2 mt-2">{div}</div>'
+    return f'<div class="border rounded-3 p-2 mt-2 block">{div}</div>'

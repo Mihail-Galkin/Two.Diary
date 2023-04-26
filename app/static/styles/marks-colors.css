@@ -1,0 +1,56 @@
+.text-bg-2 {
+    background-color: var(--mark-2-color);
+}
+
+.text-bg-3 {
+    background-color: var(--mark-3-color);
+}
+
+.text-bg-4 {
+    background-color: var(--mark-4-color);
+}
+
+.text-bg-5 {
+    background-color: var(--mark-5-color);
+}
+
+.text-2 {
+    color: var(--mark-2-color);
+}
+
+.text-3 {
+    color: var(--mark-3-color);
+}
+
+.text-4 {
+    color: var(--mark-4-color);
+}
+
+.text-5 {
+    color: var(--mark-5-color);
+}
+
+
+.bg-2 {
+    background-color: var(--mark-2-color);
+    color: white;
+}
+
+.bg-3 {
+    background-color: var(--mark-3-color);
+    color: white;
+}
+
+.bg-4 {
+    background-color: var(--mark-4-color);
+    color: white;
+}
+
+.bg-5 {
+    background-color: var(--mark-5-color);
+    color: white;
+}
+
+.bg-NaN, .bg-0, .text-NaN, .text-0, .text-bg-NaN, .text-bg-0 {
+    display: none;
+}

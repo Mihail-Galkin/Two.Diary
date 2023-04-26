@@ -1,94 +1,61 @@
-/*[data-theme="dark"] {*/
-/*    --mark-5-color: #0D1117;*/
-/*    --mark-4-color: #0D1117;*/
-/*    --mark-3-color: #0D1117;*/
-/*    --mark-2-color: #0D1117;*/
-/*}*/
+[data-bs-theme="dark"] {
+    /*--mark-5-color: #0D1117;*/
+    /*--mark-4-color: #0D1117;*/
+    /*--mark-3-color: #0D1117;*/
+    /*--mark-2-color: #0D1117;*/
+    --bs-body-bg: #0D1117;
+    --bs-border-color: #2F353B;
+    --bs-body-color: #FFF;
+    --accent-color: #21262D;
+    --hr-color: #777777;
+
+    --footer-bg: #21262D;
+
+    --block-bg: #21262D;
+    --block-header: #252a32;
+
+    --mark-dark: #0D1117;
+}
 
 
-[data-theme="dark"] {
-    background-color: var(--bg-dark-color);
+[data-bs-theme="dark"] .header-logo {
     color: white;
 }
 
-[data-theme="dark"] h5 {
-    color: white !important;
-}
 
-[data-theme="dark"] .modal-content{
-    background-color: var(--bg-dark-color);
-    color: white;
-}
-
-
-[data-theme="dark"] .header-logo {
-    color: white;
-}
-
-[data-theme="dark"] .header {
-    border-color: var(--dark-border-color) !important;
+[data-bs-theme="dark"] hr {
+    background-color: var(--hr-color);
+    color: var(--hr-color);
+    border-color: var(--hr-color);
 }
 
 
-[data-theme="dark"] .block {
-    background-color: var(--dark-accent-color);
-    border-color: var(--dark-border-color) !important;
-}
-
-[data-theme="dark"] .footer {
-    background-color: var(--dark-accent-color);
-    border-color: var(--dark-border-color) !important;
-}
-
-[data-theme="dark"] .one-day-header {
-    background-color: var(--dark-border-color);
-}
-
-[data-theme="dark"] hr {
-    background-color: var(--dark-hr-color);
-    color: var(--dark-hr-color);
-    border-color: var(--dark-hr-color);
-}
-
-[data-theme="dark"] table {
-    border-color: var(--dark-border-color) !important;
-    color: white;
-}
-
-[data-theme="dark"] .table-text {
+[data-bs-theme="dark"] .table-text {
     color: whitesmoke;
 }
 
-[data-theme="dark"] .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    color: rgb(185, 185, 185);
-}
 
-[data-theme="dark"] select {
-    background-color: var(--dark-accent-color);
-    border-color: var(--dark-border-color);
+[data-bs-theme="dark"] select {
+    background-color: var(--accent-color);
     color: whitesmoke;
 }
 
-[data-theme="dark"] .arrow {
+[data-bs-theme="dark"] .arrow {
     filter: invert(100%);
 }
 
-[data-theme="dark"] .loader {
-    background-color: var(--bg-dark-color);
-}
 
-[data-theme="dark"] .diary-header {
-    background-color: var(--dark-accent-color) !important;
-}
-
-[data-theme="dark"] .number {
+[data-bs-theme="dark"] .number {
     filter: invert(100%);
 }
 
-[data-theme="dark"] button.btn-close {
+[data-bs-theme="dark"] button.btn-close {
     filter: invert(100%);
 }
 
-[data-theme="dark"] .search {
+[data-bs-theme="dark"] .search {
     filter: invert(100%);
 }
+
+
+
