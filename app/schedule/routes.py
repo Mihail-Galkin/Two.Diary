@@ -13,9 +13,12 @@ def schedule():
 
     strainer = SoupStrainer("div", {"class": "page-content"})
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
+
+    for img in soup.select("img"):
+        img.decompose()
     for a in soup.findAll('a'):
         a["href"] = a["href"].replace("/media/storage/file/", "https://kpml.ru/media/storage/file/")
         a["target"] = "_blank"
-    div = soup.find("div")
+    div = soup.find("div", class_="page-content")
 
     return f'<div class="border rounded-3 p-2 mt-2 block">{div}</div>'
