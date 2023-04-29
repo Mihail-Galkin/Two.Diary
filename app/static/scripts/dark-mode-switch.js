@@ -71,6 +71,10 @@
           localStorage.setItem('theme', theme)
           setTheme(theme)
           showActiveTheme(theme, true)
+            try {
+                VK_Widget_Init();
+            } catch (e) {
+            }
         })
       })
   })
