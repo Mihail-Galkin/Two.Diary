@@ -12,7 +12,6 @@ from app.utils import str_to_date, date_to_str
 @only_ajax()
 @login_required()
 def one_type_subjects(diary):
-    # TODO: задокументировать
     on_page = 4
 
     subject_name = request.args.get("subject")
