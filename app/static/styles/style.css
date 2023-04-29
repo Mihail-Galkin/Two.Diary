@@ -11,10 +11,10 @@
 
 /* variables */
 :root {
-    --mark-5-color: #59e744;
-    --mark-4-color: #ffd800;
-    --mark-3-color: #ed9121;
-    --mark-2-color: rgb(187, 59, 56);
+    --mark-5-color: #1DBE3D;
+    --mark-4-color: #FFC300;
+    --mark-3-color: #FF5733;
+    --mark-2-color: #C70039;
     --accent-color: #294262;
     --block-bg: #fff;
     --block-header: #f8f9fa;
