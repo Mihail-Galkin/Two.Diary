@@ -41,8 +41,9 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <span class=" badge
-                              text-bg-{{ marks[subject]["average"]|round|int }}">{{ marks[subject]["average"] }}</span>
+                    <span class="badge text-bg-{{ clever_round(marks[subject]["average"]) }}">
+                        {{ marks[subject]["average"] }}
+                    </span>
                 </td>
             </tr>
         {% endfor %}
@@ -71,7 +72,9 @@
                  data-count-2="{{ marks[subject]["count_2"] }}">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5>{{ subject }}</h5>
-                    <span class="badge text-bg-{{ marks[subject]["average"]|round|int }}">{{ marks[subject]["average"] }}</span>
+                    <span class="badge text-bg-{{ clever_round(marks[subject]["average"]) }}">
+                        {{ marks[subject]["average"] }}
+                    </span>
                 </div>
 
                 <div class="d-flex justify-content-start flex-wrap">

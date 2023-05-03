@@ -37,6 +37,13 @@ def create_app():
     from app.decorators import diaries
     app = Flask(__name__)
 
+    def round_half_up(num):
+        if num % 1 == 0.5:
+            return int(num) + 1
+        return round(num)
+
+    app.jinja_env.globals.update(clever_round=round_half_up)
+
     if os.getenv("FLASK_ENV") == "development":
         config = DevelopmentConfig
     elif os.getenv("FLASK_ENV") == "production":
