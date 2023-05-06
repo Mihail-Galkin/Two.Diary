@@ -3,6 +3,6 @@
    "api_version": 3,
    "layout": {
       "logo": "/static/images/favicon/tableau.png",
-      "color": "#003C8C"
+      "color": "#fff"
    }
 }
