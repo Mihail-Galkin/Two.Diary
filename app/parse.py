@@ -12,7 +12,7 @@ import csv
 import logging
 from datetime import date as d
 from datetime import timedelta as td
-from typing import Union, Tuple, Optional, Any
+from typing import Union, Optional
 
 import pandas as pd
 import requests
@@ -96,6 +96,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
             return None, None
         cookie = get_session_cookie(sess)
         user.source_session = cookie
+        db.session.merge(user)
         db.session.commit()
 
         raw_diary, _ = get_raw_diary(sess, guid, date, retry=False)

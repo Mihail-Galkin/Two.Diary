@@ -29,6 +29,7 @@ def login():
             user.email = form.email.data
             user.guid = get_guid(sess)
             user.source_session = cookie
+            db_sess.add(user)
         else:
             user = q.first()
 
@@ -36,7 +37,6 @@ def login():
         session.value = secrets.token_hex(16)
         session.user = user
 
-        db_sess.add(user)
         db_sess.add(session)
         db_sess.commit()
 
