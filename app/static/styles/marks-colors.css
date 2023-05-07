@@ -1,3 +1,23 @@
+[data-mark-theme="multicolored"] {
+    --mark-5-color: #1DBE3D;
+    --mark-4-color: #2980b9;
+    --mark-3-color: #ed9121;
+    --mark-2-color: #c0392b;
+}
+
+[data-mark-theme="plain"] {
+    --plain-marks-color: #606060;
+    --mark-5-color: var(--plain-marks-color);
+    --mark-4-color: var(--plain-marks-color);
+    --mark-3-color: var(--plain-marks-color);
+    --mark-2-color: var(--plain-marks-color);
+}
+
+[data-bs-theme="dark"] {
+
+}
+
+
 .text-bg-2 {
     background-color: var(--mark-2-color);
 }

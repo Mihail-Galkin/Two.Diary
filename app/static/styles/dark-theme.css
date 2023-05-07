@@ -1,8 +1,4 @@
 [data-bs-theme="dark"] {
-    /*--mark-5-color: #0D1117;*/
-    /*--mark-4-color: #0D1117;*/
-    /*--mark-3-color: #0D1117;*/
-    /*--mark-2-color: #0D1117;*/
     --bs-body-bg: #0D1117;
     --bs-border-color: #2F353B;
     --bs-body-color: #FFF;
@@ -13,8 +9,6 @@
 
     --block-bg: #21262D;
     --block-header: #252a32;
-
-    --mark-dark: #0D1117;
 }
 
 
