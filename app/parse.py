@@ -59,6 +59,8 @@ def get_guid(session: requests.Session) -> str:
     soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
 
     div = soup.select("div")
+    if len(div) == 0:
+        return None
     guid = div[0].attrs["data-guid"]
     return guid
 

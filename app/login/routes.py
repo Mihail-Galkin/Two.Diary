@@ -16,18 +16,24 @@ from app.parse import auth, get_session_cookie, get_guid
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        sess = auth(form.email.data, form.password.data)
+        sess = auth(form.email.data, form.password.data.strip())
         if sess is None:
             return render_template('login.html', title='Авторизация', message="Неверный пароль", form=form)
         cookie = get_session_cookie(sess)
 
         db_sess = db.session
-        q = db_sess.query(User).filter(User.email == form.email.data)
+        q = db_sess.query(User).filter(User.email == form.email.data.strip())
         if q.count() == 0:
             user = User()
-            user.set_password(form.password.data)
-            user.email = form.email.data
-            user.guid = get_guid(sess)
+            user.set_password(form.password.data.strip())
+            user.email = form.email.data.strip()
+            guid = get_guid(sess)
+            if not guid:
+                return render_template('login.html', title='Авторизация',
+                                       message="Информация о учащемся не найдена (возможно вы не являетесь "
+                                               "учеником или родителем)",
+                                       form=form)
+            user.guid = guid
             user.source_session = cookie
             db_sess.add(user)
         else:
