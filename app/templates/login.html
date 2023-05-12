@@ -28,7 +28,7 @@
                 </div>
                 <div class="m-2">
                     {% for error in form.email.errors %}
-                        <div class="alert alert-danger" role="alert"> {{ error }}</div>
+                    <div class="alert alert-danger" role="alert"> {{ error }}</div>
                     {% endfor %}
                 </div>
             </div>
@@ -36,17 +36,22 @@
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    {{ form.password(class="form-control", placeholder="Пароль", type="password") }}
+                    {{ form.password(class="form-control password-field", placeholder="Пароль", type="password") }}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                        <i class="fa fa-eye" id="togglePassword"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="m-2">
                     {% for error in form.password.errors %}
-                        <div class="alert alert-danger" role="alert"> {{ error }}</div>
+                    <div class="alert alert-danger" role="alert"> {{ error }}</div>
                     {% endfor %}
                 </div>
             </div>
             <div class="form-group"> {{ form.submit(type="submit", class="btn btn-primary btn-block") }}</div>
             {% if message %}
-                <div class="alert alert-danger" role="alert"> {{ message }}</div>
+            <div class="alert alert-danger" role="alert"> {{ message }}</div>
             {% endif %}
         </form>
         <p class="my-1">Вход через госуслуги не поддерживается, но вы можете <a
@@ -55,6 +60,7 @@
         <p class="my-1">Вход для учителей не поддерживается</p>
     </article>
 </div>
+<script src="/static/scripts/show-password-toggle.js"></script>
 </body>
 </html>
 
