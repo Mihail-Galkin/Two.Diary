@@ -34,7 +34,8 @@
 
 <body>
 <div class="wrapper">
-    <button type="button" class="btn btn-primary rounded-4 position-fixed bottom-0 start-0 mb-3 ms-3" data-bs-toggle="modal"
+    <button type="button" class="btn btn-primary rounded-4 position-fixed bottom-0 start-0 mb-3 ms-3"
+            data-bs-toggle="modal"
             data-bs-target="#settingsModal" style="width: 3em; height: 3em">
         <img src="/static/images/gear.svg" alt="" width="100%" height="100%" style="filter: invert(100%)">
     </button>
@@ -81,7 +82,18 @@
         <div class="container">
             <header class="header lh-1 py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
-                    <div class="col-4"></div>
+                    <div class="col-2">
+                        <select onchange='document.location.href = "?participant=" + this.value;' class="form-select">
+                            {% for name, guid in guids.items() %}
+                                {% if guid == current_guid %}
+                                    <option value="{{ guid }}" selected>{{ name }}</option>
+                                {% else %}
+                                    <option value="{{ guid }}">{{ name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-2"></div>
                     <div class="col-4 text-center">
                         <a class="header-logo d-block" href="/">Two.Diary</a>
                     </div>

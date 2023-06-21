@@ -13,12 +13,11 @@ class User(db.Model):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    guid = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     source_session = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     sessions = orm.relationship("Session", back_populates='user')
 
     def __repr__(self):
-        return f'<User> {self.id} {self.email} {self.guid}'
+        return f'<User> {self.id} {self.email}'
 
     def set_password(self, password):
         self.password = xor(password, os.environ["PASSWORD_KEY"])

@@ -48,7 +48,8 @@ def login_required(recreate_diary: bool = False) -> Callable:
             if sess_cookie in diaries and not recreate_diary:
                 diary = diaries[sess_cookie]
             else:
-                diary = Diary(user.source_session, user.guid)
+                participant = request.args.get("participant")
+                diary = Diary(user, current_guid=participant)
                 diaries[sess_cookie] = diary
             return func(diary, *args, **kwargs)
         return wrapper

@@ -17,7 +17,7 @@ from typing import Union, Optional
 import pandas as pd
 import requests
 import xlrd
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
 from requests import Session
 
 from app import db
@@ -46,23 +46,35 @@ def auth(login: str, password: str) -> Optional[requests.Session]:
     return session
 
 
-def get_guid(session: requests.Session) -> str:
+def get_guid(session: requests.Session) -> dict:
     """
     Получает id пользователя
 
     :param session: Сессия пользователя
-    :return: guid
+    :return: dict: {name: guid}
     """
-    response = session.get("https://one.43edu.ru/edv/index/participant")
 
-    strainer = SoupStrainer("div", {"id": "participant"})
-    soup = BeautifulSoup(response.text, 'lxml', parse_only=strainer)
+    response = session.get("https://one.43edu.ru/edv/index/participant/")
+    soup = BeautifulSoup(response.text, 'lxml')
 
-    div = soup.select("div")
-    if len(div) == 0:
-        return None
-    guid = div[0].attrs["data-guid"]
-    return guid
+    one_participant = soup.find("div", {"class": "one-participant"})
+    participants = soup.find("ul", {"id": "participants"})
+
+    if one_participant:
+        guid_element = soup.find("div", {"id": "participant"})
+        name = one_participant.text.replace("\n", "").strip()
+        while "  " in name:
+            name = name.replace("  ", " ")
+        return {name: guid_element.attrs["data-guid"]}
+    elif participants:
+        guids = {}
+        for i in participants.findAll("a"):
+            name = " ".join([j.text for j in i.find("div")]).replace("\n", "").strip()
+            while "  " in name:
+                name = name.replace("  ", " ")
+            guids[name] = i.attrs["data-guid"]
+        return guids
+    return {}
 
 
 def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
@@ -84,9 +96,12 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
     data = {'date': date}
     response = session.get(url, params=data)
     json = response.json()
+
     if json["success"]:
         return json, session
-    user = db.session.query(User).filter(User.guid == guid).first()
+
+    sess_cookie = get_session_cookie(session)
+    user = db.session.query(User).filter(User.source_session == sess_cookie).first()
     if retry:
         sess = auth(user.email, user.get_password())
         if sess is None:

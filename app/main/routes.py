@@ -8,4 +8,4 @@ from app.main import bp
 @bp.route('/index')
 @login_required(recreate_diary=True)
 def index(diary):
-    return render_template("index.html")
+    return render_template("index.html", guids=diary.guids)

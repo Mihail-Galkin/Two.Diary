@@ -2,6 +2,7 @@ import logging
 import secrets
 
 import flask
+import requests
 from flask import render_template, redirect, make_response, session
 
 from app import db
@@ -10,6 +11,7 @@ from app.login import bp
 from app.models.sessions import Session
 from app.models.users import User
 from app.parse import auth, get_session_cookie, get_guid
+from app.useragent import get_header
 
 
 @bp.route('/login', methods=["GET", "POST"])
@@ -19,6 +21,8 @@ def login():
         sess = auth(form.email.data, form.password.data.strip())
         if sess is None:
             return render_template('login.html', title='Авторизация', message="Неверный пароль", form=form)
+        if get_guid(sess) == {}:
+            return render_template('login.html', title='Авторизация', message="Не найдено учащихся", form=form)
         cookie = get_session_cookie(sess)
 
         db_sess = db.session
@@ -27,13 +31,6 @@ def login():
             user = User()
             user.set_password(form.password.data.strip())
             user.email = form.email.data.strip()
-            guid = get_guid(sess)
-            if not guid:
-                return render_template('login.html', title='Авторизация',
-                                       message="Информация о учащемся не найдена (возможно вы не являетесь "
-                                               "учеником или родителем)",
-                                       form=form)
-            user.guid = guid
             user.source_session = cookie
             db_sess.add(user)
         else:

@@ -15,7 +15,8 @@ from datetime import timedelta as td
 import requests
 from markupsafe import Markup
 
-from app.parse import get_raw_diary, get_periods
+from app.models.users import User
+from app.parse import get_raw_diary, get_periods, get_guid
 from app.useragent import get_header
 from app.utils import get_monday, get_readable_date, date_to_str, str_to_date
 
@@ -94,7 +95,8 @@ class Diary:
     """
     Класс дневника кэширует все недели и при обращении к дню возвращает хранящийся класс, либо получает новый с сервера
     """
-    def __init__(self, session_token: str, guid: str):
+
+    def __init__(self, user: User, current_guid=None):
         """
         Инициализация дневника:
             1. Создание сессии 43edu RESTful
@@ -104,14 +106,22 @@ class Diary:
         :param session_token: Сессионное куки
         :param guid: guid пользователя
         """
-        self.guid = guid
-
-        self.session_token = session_token
-        cookies = {'X1_SSO': session_token}
+        self.session_token = user.source_session
+        cookies = {'X1_SSO': user.source_session}
 
         self.session = requests.Session()
         self.session.headers.update(get_header())
-        self.session.get("https://one.43edu.ru/", cookies=cookies)
+        self.session.cookies.update(cookies)
+        self.session.get("https://one.43edu.ru/")
+
+        self.guids = get_guid(self.session)
+
+        items = list(self.guids.items())
+        if current_guid:
+            self.guid = current_guid
+            self.name = [i for i in items if i[1] == current_guid][0][0]
+        else:
+            self.name, self.guid = items[0]
 
         self.weeks: typing.Dict[d, Week] = {}
 
