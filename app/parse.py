@@ -205,12 +205,9 @@ def get_periods(json, is_quarters=False):
     edu_periods = json["data"]["edu_periods"]
     if not is_quarters:
         return edu_periods
-    quarters = []
-    parent = None
+    parents = {}
     for i in edu_periods:
-        if i["name"] == "По четвертям":
-            parent = i["eduPeriodGuid"]
-    for i in edu_periods:
-        if i["parentEduPeriodGuid"] == parent:
-            quarters.append(i)
-    return quarters
+        parents[i["parentEduPeriodGuid"]] = parents.get(i["parentEduPeriodGuid"], []) + [i]
+    for key, val in parents.items():
+        if len(val) == 4:
+            return val

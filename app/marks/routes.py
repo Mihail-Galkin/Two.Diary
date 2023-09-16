@@ -36,7 +36,8 @@ def marks_(diary):
                 for mark in subject.marks:
                     if subject.name not in marks:
                         marks[subject.name] = {"marks": []}
-                    marks[subject.name]["marks"].append({"value": int(mark), "date": day.str_date, "subject_index": i})
+                    marks[subject.name]["marks"].append({"value": int(mark.replace("Зач", "1")), "date": day.str_date,
+                                                         "subject_index": i})
             date += td(days=1)
 
         for subject in marks:
@@ -60,7 +61,7 @@ def marks_(diary):
                 int_marks = []
                 average = 0
             else:
-                int_marks = list(map(int, i[2].split(",")))
+                int_marks = list(map(int, i[2].replace("Зач", "1").split(",")))
                 average = round(sum(int_marks) / len(int_marks), 2)
             marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks),
                            "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3),
