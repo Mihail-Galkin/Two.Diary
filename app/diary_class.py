@@ -175,7 +175,8 @@ class Diary:
                                   homework=(raw_subject["homework"] or no_value),
                                   previous_homework=(raw_subject["previousHomework"] or no_value),
                                   teacher=raw_subject["teacher"],
-                                  marks=raw_subject["marksRaw"],
+                                  marks=list(map(lambda s: s.replace("Зач", "1").replace("Незач", "0"),
+                                                 raw_subject["marksRaw"])),
                                   time_begin=raw_subject["lessonTimeBegin"],
                                   time_end=raw_subject["lessonTimeEnd"])
                 subjects[int(raw_subject["lessonNumber"])] = subject

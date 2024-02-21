@@ -17,6 +17,13 @@
 
 }
 
+.text-bg-0 {
+    background-color: var(--mark-2-color);
+}
+
+.text-bg-1 {
+    background-color: var(--mark-5-color);
+}
 
 .text-bg-2 {
     background-color: var(--mark-2-color);
@@ -32,6 +39,14 @@
 
 .text-bg-5 {
     background-color: var(--mark-5-color);
+}
+
+.text-0 {
+    color: var(--mark-2-color);
+}
+
+.text-1 {
+    color: var(--mark-5-color);
 }
 
 .text-2 {
@@ -50,6 +65,15 @@
     color: var(--mark-5-color);
 }
 
+.bg-0 {
+    background-color: var(--mark-2-color);
+    color: white;
+}
+
+.bg-1 {
+    background-color: var(--mark-5-color);
+    color: white;
+}
 
 .bg-2 {
     background-color: var(--mark-2-color);
@@ -71,6 +95,6 @@
     color: white;
 }
 
-.bg-NaN, .bg-0, .text-NaN, .text-0, .text-bg-NaN, .text-bg-0 {
+.bg-NaN, .text-NaN, .text-bg-NaN {
     display: none;
 }

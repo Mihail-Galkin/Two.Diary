@@ -61,13 +61,14 @@ def marks_(diary):
                 int_marks = []
                 average = 0
             else:
-                int_marks = list(map(int, i[2].replace("Зач", "1").split(",")))
+                int_marks = list(map((lambda s: int(s) if s.isdigit() else -1),
+                                     i[2].replace("Зач", "1").replace("Незач", "0").replace(" ", "").split(",")))
                 average = round(sum(int_marks) / len(int_marks), 2)
             marks[i[1]] = {"marks": int_marks, "average": average, "sum": sum(int_marks), "count": len(int_marks),
                            "count_5": int_marks.count(5), "count_4": int_marks.count(4), "count_3": int_marks.count(3),
                            "count_2": int_marks.count(2)}
 
     return render_template("marks.html", marks=marks,
-                           periods=diary.quarters + [{"name": "Итоговые оценки"}, {"name": "Live"}],
+                           periods=diary.periods + [{"name": "Итоговые оценки"}, {"name": "Live"}],
                            selected=request.args.get("selected", diary.current["name"]),
                            live_mode=live_mode)

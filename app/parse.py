@@ -53,7 +53,6 @@ def get_guid(session: requests.Session) -> dict:
     :param session: Сессия пользователя
     :return: dict: {name: guid}
     """
-
     response = session.get("https://one.43edu.ru/edv/index/participant/")
     soup = BeautifulSoup(response.text, 'lxml')
 
