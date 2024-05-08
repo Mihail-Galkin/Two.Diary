@@ -169,6 +169,8 @@ class Diary:
                     continue
                 if raw_subject["periodMark"]:
                     continue
+                if raw_subject["lessonNumber"] is None:
+                    continue  # Заметка
                 subject = Subject(index=int(raw_subject["lessonNumber"]),
                                   name=raw_subject["subject"],
                                   theme=(raw_subject["topic"] or no_value),
