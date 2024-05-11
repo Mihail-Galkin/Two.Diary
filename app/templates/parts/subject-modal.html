@@ -11,20 +11,6 @@
                 <hr class="my-1">
                 <div class="d-flex justify-content-between">
                     <h5 class="fw-bolder">Домашнее задание:</h5>
-                    {% if subject.homework != "<i>Не указано</i>" %}
-                        <div class="d-flex">
-                            <a href="https://www.perplexity.ai/search?q={{ subject.homework }} in russian"
-                               target="_blank">
-                                <img src="/static/images/robot.svg" class="search me-2" alt="Поиск в ИИ"
-                                     style="width: 30px; height: 30px">
-                            </a>
-                            <a href="https://www.google.ru/search?q={{ subject.homework }}" target="_blank">
-                                <img src="/static/images/box-arrow-up-right.svg" class="search" alt="Поиск в интернете"
-                                     style="width: 20px; height: 20px">
-                            </a>
-                        </div>
-                    {% endif %}
-
                 </div>
 
                 <p class="urlify">{{ subject.homework }}</p>
