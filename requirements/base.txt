@@ -14,3 +14,4 @@ email_validator
 lxml
 certifi
 python-dotenv
+cryptography

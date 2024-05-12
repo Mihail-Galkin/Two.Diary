@@ -1,10 +1,10 @@
 import os
 
 import sqlalchemy
+from cryptography.fernet import Fernet
 from sqlalchemy import orm
 
 from app import db
-from app.crypt import xor
 
 
 class User(db.Model):
@@ -20,7 +20,9 @@ class User(db.Model):
         return f'<User> {self.id} {self.email}'
 
     def set_password(self, password):
-        self.password = xor(password, os.environ["PASSWORD_KEY"])
+        cipher = Fernet(os.environ["PASSWORD_KEY"].encode()).encrypt(password.encode()).decode()
+        self.password = cipher
 
     def get_password(self):
-        return xor(self.password, os.environ["PASSWORD_KEY"])
+        password = Fernet(os.environ["PASSWORD_KEY"].encode()).decrypt(self.password).decode()
+        return password
