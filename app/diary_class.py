@@ -194,7 +194,7 @@ class Diary:
                                   name=raw_subject["subject"],
                                   theme=(raw_subject["topic"] or no_value),
                                   homework=(raw_subject["homework"] or no_value),
-                                  previous_homework=(raw_subject["previousHomework"] or no_value),
+                                  previous_homework=raw_subject["previousHomework"],
                                   teacher=raw_subject["teacher"],
                                   marks=list(map(lambda s: s.replace("Зач", "1").replace("Незач", "0"),
                                                  raw_subject["marksRaw"])),

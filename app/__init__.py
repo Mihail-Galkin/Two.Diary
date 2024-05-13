@@ -34,7 +34,7 @@ from config import DevelopmentConfig, ProductionConfig
 
 def create_app():
     from app.decorators import diaries
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/')
 
     def round_half_up(num):
         if num % 1 == 0.5:
