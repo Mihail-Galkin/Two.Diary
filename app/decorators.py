@@ -11,6 +11,7 @@ import flask
 from flask import request, abort, redirect
 
 from app.diary_class import Diary
+from app.exceptions import WrongPassword
 from app.utils import get_user
 
 
@@ -49,7 +50,11 @@ def login_required(recreate_diary: bool = False) -> Callable:
                 diary = diaries[sess_cookie]
             else:
                 participant = request.args.get("participant")
-                diary = Diary(user, current_guid=participant)
+                # аргумент participant появляется только через js при нажатии кнопки смены ученика на сайте
+                try:
+                    diary = Diary(user, current_guid=participant)
+                except WrongPassword:
+                    return redirect("/login")
                 diaries[sess_cookie] = diary
             return func(diary, *args, **kwargs)
         return wrapper

@@ -15,10 +15,12 @@ from datetime import timedelta as td
 import requests
 from markupsafe import Markup
 
+from app import db
+from app.exceptions import WrongPassword
 from app.models.users import User
-from app.parse import get_raw_diary, get_periods, get_guid
+from app.parse import get_raw_diary, get_periods, get_guid, auth, get_session_cookie
 from app.useragent import get_header
-from app.utils import get_monday, get_readable_date, date_to_str, str_to_date
+from app.utils import get_monday, get_readable_date, date_to_str, str_to_date, remove_user
 
 
 @dataclass
@@ -115,8 +117,25 @@ class Diary:
         self.session.get("https://one.43edu.ru/")
 
         self.guids = get_guid(self.session)
-
         items = list(self.guids.items())
+
+        if not items:
+            self.session = auth(user.email, user.get_password())
+            if self.session is None:
+                remove_user(user)
+                raise WrongPassword()
+            cookie = get_session_cookie(self.session)
+            user.source_session = cookie
+            db.session.merge(user)
+            db.session.commit()
+
+            self.guids = get_guid(self.session)
+            items = list(self.guids.items())
+
+            if not items:
+                remove_user(user)
+                raise WrongPassword()
+
         if current_guid:
             self.guid = current_guid
             self.name = [i for i in items if i[1] == current_guid][0][0]

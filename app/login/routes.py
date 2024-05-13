@@ -1,9 +1,7 @@
-import logging
 import secrets
 
 import flask
-import requests
-from flask import render_template, redirect, make_response, session
+from flask import render_template, redirect, session
 
 from app import db
 from app.forms.login import LoginForm
@@ -11,7 +9,6 @@ from app.login import bp
 from app.models.sessions import Session
 from app.models.users import User
 from app.parse import auth, get_session_cookie, get_guid
-from app.useragent import get_header
 
 
 @bp.route('/login', methods=["GET", "POST"])

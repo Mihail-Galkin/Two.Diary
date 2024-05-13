@@ -23,7 +23,7 @@ from requests import Session
 from app import db
 from app.models.users import User
 from app.useragent import get_header
-from app.utils import date_to_str, str_to_date
+from app.utils import date_to_str, str_to_date, remove_user
 
 
 def auth(login: str, password: str) -> Optional[requests.Session]:
@@ -104,11 +104,7 @@ def get_raw_diary(session: requests.Session, guid: str, date: Union[str, d],
     if retry:
         sess = auth(user.email, user.get_password())
         if sess is None:
-            db_sess = db.session
-            for i in user.sessions:
-                db_sess.delete(i)
-            db_sess.delete(user)
-            db_sess.commit()
+            remove_user(user)
             return None, None
         cookie = get_session_cookie(sess)
         user.source_session = cookie

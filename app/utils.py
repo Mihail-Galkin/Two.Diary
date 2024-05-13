@@ -72,3 +72,15 @@ def get_user(sess_cookie: str) -> Optional[User]:
     if q.count() == 0:
         return None
     return q.first().user
+
+
+def remove_user(user: User):
+    """
+    Полностью удаляет информацию о пользователе в бд
+    :param user: Пользователь для удаления
+    """
+    db_sess = db.session
+    for i in user.sessions:
+        db_sess.delete(i)
+    db_sess.delete(user)
+    db_sess.commit()
