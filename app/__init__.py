@@ -26,6 +26,7 @@ import sys
 from datetime import timedelta as td
 
 import flask
+from dotenv import load_dotenv, find_dotenv
 from flask import Flask
 
 from app.extensions import db
@@ -33,6 +34,7 @@ from config import DevelopmentConfig, ProductionConfig
 
 
 def create_app():
+    load_dotenv(find_dotenv())
     from app.decorators import diaries
     app = Flask(__name__, static_url_path='/')
 
