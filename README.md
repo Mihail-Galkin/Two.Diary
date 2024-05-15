@@ -7,7 +7,7 @@
 pip3 install -r requirements/production.txt
 ```
 2. Установить переменные среды
-- FLASK_ENV: "development"
+- FLASK_ENV: "production"
 - PASSWORD_KEY, SECRET_KEY: устанавливается в .env запуском setup_pas.py. Сайт автоматически подгружает переменные из .env
 - DATABASE_URL: для локального хранения бд sqlite:///users.db?check_same_thread=False
 ## Основная информация
