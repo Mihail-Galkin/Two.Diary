@@ -4,7 +4,7 @@
 ## Установка
 1. Установить зависимости 
 ```
-pip3 install -r requirements/development.txt
+pip3 install -r requirements/production.txt
 ```
 2. Установить переменные среды
 - FLASK_ENV: "development"
